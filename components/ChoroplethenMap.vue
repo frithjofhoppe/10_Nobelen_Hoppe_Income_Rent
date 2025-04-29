@@ -27,6 +27,7 @@ const filteredData = computed(() => {
 
 <template>
   <section class="min-h-screen p-10 flex flex-col justify-center items-center">
+    <SwitzerlandCantonsMap />
     <h2 class="text-3xl font-semibold mb-4">Regionale Mietpreisunterschiede</h2>
     <div id="map" class="w-full max-w-4xl h-auto border border-gray-200 p-4">
 
@@ -64,7 +65,8 @@ const filteredData = computed(() => {
 
       <ul class="list-disc pl-5">
         <li v-for="(entry, index) in filteredData" :key="index">
-          <strong>{{ entry.region }}</strong>, {{ entry.education }}, {{ entry.professionalPosition }}, {{ entry.gender
+          <strong>{{ entry.region }}</strong>, {{ entry.education }}, {{ entry.professionalPosition }}, {{
+            entry.gender
           }}:
           {{ entry.value.centralValue }} CHF (Median)
         </li>
