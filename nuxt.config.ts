@@ -10,6 +10,10 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
+  components: [
+    { path: '~/components', pathPrefix: false },
+    { path: '~/components/layout', pathPrefix: false },
+  ],
   modules: [
     '@nuxt/eslint',
     '@nuxt/icon',
