@@ -35,7 +35,7 @@ const filteredData = computed(() => {
           <label class="font-medium">Ausbildung</label>
           <div v-for="item in uniqueEducations" :key="item">
             <label>
-              <input type="checkbox" :value="item" v-model="selectedEducations" />
+              <input v-model="selectedEducations" type="checkbox" :value="item">
               {{ item }}
             </label>
           </div>
@@ -45,7 +45,7 @@ const filteredData = computed(() => {
           <label class="font-medium">Berufliche Stellung</label>
           <div v-for="item in uniquePositions" :key="item">
             <label>
-              <input type="checkbox" :value="item" v-model="selectedPositions" />
+              <input v-model="selectedPositions" type="checkbox" :value="item">
               {{ item }}
             </label>
           </div>
@@ -55,7 +55,7 @@ const filteredData = computed(() => {
           <label class="font-medium">Geschlecht</label>
           <div v-for="item in uniqueGenders" :key="item">
             <label>
-              <input type="checkbox" :value="item" v-model="selectedGenders" />
+              <input v-model="selectedGenders" type="checkbox" :value="item">
               {{ item }}
             </label>
           </div>
@@ -64,7 +64,8 @@ const filteredData = computed(() => {
 
       <ul class="list-disc pl-5">
         <li v-for="(entry, index) in filteredData" :key="index">
-          <strong>{{ entry.region }}</strong>, {{ entry.education }}, {{ entry.professionalPosition }}, {{ entry.gender }}:
+          <strong>{{ entry.region }}</strong>, {{ entry.education }}, {{ entry.professionalPosition }}, {{ entry.gender
+          }}:
           {{ entry.value.centralValue }} CHF (Median)
         </li>
       </ul>
