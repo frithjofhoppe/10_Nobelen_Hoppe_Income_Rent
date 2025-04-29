@@ -12,12 +12,23 @@ import { onMounted, ref } from 'vue'
 
 const svgRef = ref()
 
-// Dummy data for coloring based on population density or some other metric
-const cantonData = {
-  "Zurich": { populationDensity: 500 },
-  "Geneva": { populationDensity: 300 },
-  "Bern": { populationDensity: 200 },
-  // Add more cantons and their data here
+const cantonRentPrices = {
+  "Aargau": 2244.0,
+  "Appenzell A.Rh.": 2044.0,
+  "Genf": 1996.0,
+  "Graubünden": 1815.0,
+  "Jura": 1391.0,
+  "Luzern": 2383.0,
+  "Neuenburg": 1995.0,
+  "Nidwalden": 2235.0,
+  "Obwalden": 2225.0,
+  "Schaffhausen": 2168.0,
+  "Schwyz": 2801.0,
+  "Solothurn": 2051.0,
+  "St.Gallen": 1996.0,
+  "Tessin": 2127.0,
+  "Thurgau": 2153.0,
+  "Uri": 1372.0,
 }
 
 onMounted(async () => {
@@ -41,66 +52,109 @@ onMounted(async () => {
 
   const projection = d3.geoMercator()
     .center([8.3, 46.8])
-    .scale(9000)
+    .scale(10000)
     .translate([width / 2, height / 2])
 
   const path = d3.geoPath().projection(projection)
 
+  const colorScale = d3.scaleSequential(d3.interpolateYlGnBu)
+    .domain([1000, 3000])
+
+  // Create the tooltip once at the start
+  const tooltip = d3.select('body')
+    .append('div')
+    .attr('class', 'tooltip')
+    .style('position', 'absolute')
+    .style('background', '#fff')
+    .style('border', '1px solid #ccc')
+    .style('padding', '10px')
+    .style('border-radius', '4px')
+    .style('box-shadow', '0 2px 4px rgba(0, 0, 0, 0.2)')
+    .style('pointer-events', 'none')
+    .style('opacity', 0)
+
   svg.selectAll('path')
     .data(geoData.features)
-    .join('path')
+    .enter()
+    .append('path')
     .attr('d', path)
-    .attr('fill', d => {
-      // Color based on population density or other variable
-      const cantonName = d.properties.name || d.properties.NAME
-      const data = cantonData[cantonName]
-      return data ? getColorForDensity(data.populationDensity) : '#cccccc'
+    .attr('fill', (d) => {
+      const cantonName = d.properties.name
+      const avgRentPrice = cantonRentPrices[cantonName]
+      return avgRentPrice ? colorScale(avgRentPrice) : '#ccc' // Use #ccc for missing data
     })
-    .attr('stroke', '#333333')
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 0.5)
     .on('mouseover', function (event, d) {
-      const cantonName = d.properties.name || d.properties.NAME
-      const data = cantonData[cantonName]
-      const info = data ? `Population Density: ${data.populationDensity} people/km²` : 'No data available'
+      const cantonName = d.properties.name
+      const avgRentPrice = cantonRentPrices[cantonName]
+      d3.select(this)
+        .attr('fill', '#f00')
 
-      d3.select(this).attr('fill', 'orange')
+      tooltip
+        .html(`<strong>${cantonName}</strong><br>Avg Rent: ${avgRentPrice ? avgRentPrice.toLocaleString('en-US', { style: 'currency', currency: 'CHF' }) : 'No Data'}`)
 
-      // Tooltip or popup info
-      showPopup(event, cantonName, info)
+      const tooltipWidth = tooltip.node().offsetWidth
+      const tooltipHeight = tooltip.node().offsetHeight
+
+      const left = event.pageX + 10
+      const top = event.pageY + 10
+
+      // Prevent tooltip from going out of the screen
+      const adjustedLeft = left + tooltipWidth > window.innerWidth ? left - tooltipWidth - 20 : left
+      const adjustedTop = top + tooltipHeight > window.innerHeight ? top - tooltipHeight - 20 : top
+
+      tooltip
+        .style('left', `${adjustedLeft}px`)
+        .style('top', `${adjustedTop}px`)
+        .style('opacity', 1)
     })
     .on('mouseout', function () {
       d3.select(this).attr('fill', (d) => {
-        const cantonName = d.properties.name || d.properties.NAME
-        const data = cantonData[cantonName]
-        return data ? getColorForDensity(data.populationDensity) : '#cccccc'
+        const cantonName = d.properties.name
+        const avgRentPrice = cantonRentPrices[cantonName]
+        return avgRentPrice ? colorScale(avgRentPrice) : '#ccc'
       })
-      hidePopup()
+      tooltip.style('opacity', 0)
     })
-    .append('title')
-    .text(d => d.properties.name || d.properties.NAME)
+
+  // Optional: Add a legend for the color scale
+  const legend = svg.append('g')
+    .attr('transform', 'translate(20, 20)')
+
+  const legendScale = d3.scaleLinear()
+    .domain([1000, 3000])
+    .range([0, 200])
+
+  const legendAxis = d3.axisBottom(legendScale)
+    .ticks(5)
+    .tickFormat(d3.format('$,.0f'))
+
+  legend.append('g')
+    .attr('transform', 'translate(0, 20)')
+    .call(legendAxis)
+
+  legend.append('rect')
+    .attr('width', 200)
+    .attr('height', 20)
+    .style('fill', 'url(#gradient)')
+
+  const gradient = svg.append('defs')
+    .append('linearGradient')
+    .attr('id', 'gradient')
+    .attr('x1', '0%')
+    .attr('x2', '100%')
+    .attr('y1', '0%')
+    .attr('y2', '0%')
+
+  gradient.append('stop')
+    .attr('offset', '0%')
+    .style('stop-color', colorScale(1000))
+
+  gradient.append('stop')
+    .attr('offset', '100%')
+    .style('stop-color', colorScale(3000))
 })
-
-function getColorForDensity(density) {
-  if (density > 400) return '#ff0000' // High density: Red
-  if (density > 200) return '#ff9900' // Medium density: Orange
-  return '#cccccc' // Low density: Light grey
-}
-
-function showPopup(event, cantonName, info) {
-  const tooltip = d3.select('body').append('div')
-    .attr('class', 'tooltip')
-    .style('position', 'absolute')
-    .style('background-color', 'white')
-    .style('padding', '10px')
-    .style('border', '1px solid #ccc')
-    .style('box-shadow', '0 0 5px rgba(0, 0, 0, 0.1)')
-    .html(`<strong>${cantonName}</strong><br>${info}`)
-    .style('left', `${event.pageX + 10}px`)
-    .style('top', `${event.pageY + 10}px`)
-}
-
-function hidePopup() {
-  d3.selectAll('.tooltip').remove()
-}
 </script>
 
 <style scoped>
@@ -112,5 +166,6 @@ svg {
 .tooltip {
   pointer-events: none;
   z-index: 10;
+  transition: opacity 0.2s ease;
 }
 </style>
