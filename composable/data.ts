@@ -62,11 +62,11 @@ export function useRegionCantonMapping() {
         },
         {
             regionName: GeographicRegion.Mittelland,
-            cantonName: ['Bern', 'Solothurn', 'Aargau', 'Luzern']
+            cantonName: ['Bern', 'Solothurn', 'Luzern']
         },
         {
             regionName: GeographicRegion.Nordwestschweiz,
-            cantonName: ['Basel-Stadt', 'Basel-Landschaft', 'Aargau']
+            cantonName: ['Basel-Stadt', 'Basel-Landschaft', 'Aargau', 'Jura']
         },
         {
             regionName: GeographicRegion.Zuerich,
@@ -74,11 +74,11 @@ export function useRegionCantonMapping() {
         },
         {
             regionName: GeographicRegion.Ostschweiz,
-            cantonName: ['St.Gallen', 'Thurgau', 'Appenzell I.Rh.', 'Appenzell A.Rh.', 'Glarus', 'Graubünden']
+            cantonName: ['Schaffhausen', 'St.Gallen', 'Thurgau', 'Appenzell I.Rh.', 'Appenzell A.Rh.', 'Glarus', 'Graubünden']
         },
         {
             regionName: GeographicRegion.Zentralschweiz,
-            cantonName: ['Zug', 'Obwalden', 'Nidwalden']
+            cantonName: ['Zug', 'Obwalden', 'Nidwalden','Uri', 'Schwyz']
         },
         {
             regionName: GeographicRegion.Tessin,
