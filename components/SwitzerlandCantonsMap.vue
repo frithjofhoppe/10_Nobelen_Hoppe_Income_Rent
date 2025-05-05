@@ -9,8 +9,47 @@
 import * as d3 from 'd3'
 import * as topojson from 'topojson-client'
 import { onMounted, ref } from 'vue'
+import { useRegionCantonMapping } from '@/composable/data'
 
+
+const mapping = useRegionCantonMapping()
 const svgRef = ref()
+
+const props = defineProps({
+  data : {
+    type: Object,
+    required: true
+  }
+})
+
+const cantonMapping = {
+      1: 'ZH',
+      2: 'BE',
+      3: 'LU',
+      4: 'UR',
+      5: 'SZ',
+      6: 'OW',
+      7: 'NW',
+      8: 'GL',
+      9: 'ZG',
+      10: 'FR',
+      11: 'SO',
+      12: 'BS',
+      13: 'BL',
+      14: 'SH',
+      15: 'AR',
+      16: 'AI',
+      17: 'SG',
+      18: 'GR',
+      19: 'AG',
+      20: 'TG',
+      21: 'TI',
+      22: 'VD',
+      23: 'VS',
+      24: 'NE',
+      25: 'GE',
+      26: 'JU',
+}
 
 const cantonRentPrices = {
   "Aargau": 2244.0,
@@ -31,14 +70,13 @@ const cantonRentPrices = {
   "Uri": 1372.0,
 }
 
-onMounted(async () => {
+async function renderMap(data) {
   const width = 800
   const height = 600
 
   // Load TopoJSON data
   const res = await fetch('https://unpkg.com/swiss-maps@4/2021/ch-combined.json')
   const topoData = await res.json()
-
   // Extract GeoJSON for cantons
   const geoData = topojson.feature(topoData, topoData.objects.cantons)
 
@@ -91,8 +129,10 @@ onMounted(async () => {
       d3.select(this)
         .attr('fill', '#f00')
 
+      const cantonEntry = mapping.find(x => x.cantonCode == cantonMapping[d.id])
+
       tooltip
-        .html(`<strong>${cantonName}</strong><br>Avg Rent: ${avgRentPrice ? avgRentPrice.toLocaleString('en-US', { style: 'currency', currency: 'CHF' }) : 'No Data'}`)
+        .html(`<strong>${cantonEntry.cantonName}</strong><br>Miete ${data.find(entry => entry.region === cantonEntry.regionName).value.centralValue} CHF`)
 
       const tooltipWidth = tooltip.node().offsetWidth
       const tooltipHeight = tooltip.node().offsetHeight
@@ -154,7 +194,19 @@ onMounted(async () => {
   gradient.append('stop')
     .attr('offset', '100%')
     .style('stop-color', colorScale(3000))
-})
+}
+
+
+watch(() => props.data, async (newData) => {
+  if (newData) {
+    await renderMap(      newData
+    .filter(entry => entry.professionalPosition === 'Ohne Kaderfunktion')
+    .filter(entry => entry.gender = 'Frauen')
+    .filter(entry => entry.education === 'Universitäre Hochschule (UNI,ETH)')
+    )
+  }
+}, { immediate: true })
+
 </script>
 
 <style scoped>

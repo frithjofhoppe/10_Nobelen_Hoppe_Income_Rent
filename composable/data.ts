@@ -40,8 +40,9 @@ interface DataValue {
 
 
 interface RegionCantonMapping {
-    regionName: GeographicRegion,
-    cantonName: string[]
+    cantonCode: string,
+    cantonName: string,
+    regionName: GeographicRegion
 }
 
 interface CantonRentPrice {
@@ -56,34 +57,32 @@ interface RoomRentPrice {
 
 export function useRegionCantonMapping() {
     return [
-        {
-            regionName: GeographicRegion.Westschweiz,
-            cantonName: ['Genf', 'Waadt', 'Neuenburg', 'Freiburg', 'Wallis']
-        },
-        {
-            regionName: GeographicRegion.Mittelland,
-            cantonName: ['Bern', 'Solothurn', 'Luzern']
-        },
-        {
-            regionName: GeographicRegion.Nordwestschweiz,
-            cantonName: ['Basel-Stadt', 'Basel-Landschaft', 'Aargau', 'Jura']
-        },
-        {
-            regionName: GeographicRegion.Zuerich,
-            cantonName: ['Zürich']
-        },
-        {
-            regionName: GeographicRegion.Ostschweiz,
-            cantonName: ['Schaffhausen', 'St.Gallen', 'Thurgau', 'Appenzell I.Rh.', 'Appenzell A.Rh.', 'Glarus', 'Graubünden']
-        },
-        {
-            regionName: GeographicRegion.Zentralschweiz,
-            cantonName: ['Zug', 'Obwalden', 'Nidwalden','Uri', 'Schwyz']
-        },
-        {
-            regionName: GeographicRegion.Tessin,
-            cantonName: ['Tessin']
-        }
+        {cantonCode: 'GE', cantonName: 'Genf', regionName: GeographicRegion.Westschweiz},
+        {cantonCode: 'VD', cantonName: 'Waadt', regionName: GeographicRegion.Westschweiz},
+        {cantonCode: 'NE', cantonName: 'Neuenburg', regionName: GeographicRegion.Westschweiz},
+        {cantonCode: 'FR', cantonName: 'Freiburg', regionName: GeographicRegion.Westschweiz},
+        {cantonCode: 'VS', cantonName: 'Wallis', regionName: GeographicRegion.Westschweiz},
+        {cantonCode: 'BE', cantonName: 'Bern', regionName: GeographicRegion.Mittelland},
+        {cantonCode: 'SO', cantonName: 'Solothurn', regionName: GeographicRegion.Mittelland},
+        {cantonCode: 'LU', cantonName: 'Luzern', regionName: GeographicRegion.Mittelland},
+        {cantonCode: 'BS', cantonName: 'Basel-Stadt', regionName: GeographicRegion.Nordwestschweiz},
+        {cantonCode: 'BL', cantonName: 'Basel-Landschaft', regionName: GeographicRegion.Nordwestschweiz},
+        {cantonCode: 'AG', cantonName: 'Aargau', regionName: GeographicRegion.Nordwestschweiz},
+        {cantonCode: 'JU', cantonName: 'Jura', regionName: GeographicRegion.Nordwestschweiz},
+        {cantonCode: 'ZH', cantonName: 'Zürich', regionName: GeographicRegion.Zuerich},
+        {cantonCode: 'SH', cantonName: 'Schaffhausen', regionName: GeographicRegion.Ostschweiz},
+        {cantonCode: 'SG', cantonName: 'St.Gallen', regionName: GeographicRegion.Ostschweiz},
+        {cantonCode: 'TG', cantonName: 'Thurgau', regionName: GeographicRegion.Ostschweiz},
+        {cantonCode: 'AI', cantonName: 'Appenzell I.Rh.', regionName: GeographicRegion.Ostschweiz},
+        {cantonCode: 'AR', cantonName: 'Appenzell A.Rh.', regionName: GeographicRegion.Ostschweiz},
+        {cantonCode: 'GL', cantonName: 'Glarus', regionName: GeographicRegion.Ostschweiz},
+        {cantonCode: 'GR', cantonName: 'Graubünden', regionName: GeographicRegion.Ostschweiz},
+        {cantonCode: 'ZG', cantonName: 'Zug', regionName: GeographicRegion.Zentralschweiz},
+        {cantonCode: 'OW', cantonName: 'Obwalden', regionName: GeographicRegion.Zentralschweiz},
+        {cantonCode: 'NW', cantonName: 'Nidwalden', regionName: GeographicRegion.Zentralschweiz},
+        {cantonCode: 'UR', cantonName: 'Uri', regionName: GeographicRegion.Zentralschweiz},
+        {cantonCode: 'SZ', cantonName: 'Schwyz', regionName: GeographicRegion.Zentralschweiz},
+        {cantonCode: 'TI', cantonName: 'Tessin', regionName: GeographicRegion.Tessin},
     ] as RegionCantonMapping[];
 }
 
@@ -128,7 +127,6 @@ export function useIncomeData() {
                 for (const educationKey of educationKeys) {
                     for (const positionKey of positionKeys) {
                         for (const genderKey of genderKeys) {
-                            console.log(">> entry");
                             entries.push({
                                 region: regions[regionKey],
                                 education: educations[educationKey],
