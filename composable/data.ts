@@ -46,7 +46,7 @@ interface RegionCantonMapping {
 }
 
 interface CantonRentPrice {
-    cantonName: string,
+    cantonCode: string,
     prices: RoomRentPrice[]
 }
 
@@ -163,7 +163,7 @@ export function useIncomeData() {
 
 const cantonData: CantonRentPrice[] = [
     {
-        "cantonName": "Aargau",
+        "cantonCode": "AG",
         "prices": [
             {
                 "nofRooms": "1",
@@ -192,7 +192,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Appenzell A.Rh.",
+        "cantonCode": "AR",
         "prices": [
             {
                 "nofRooms": "1",
@@ -221,7 +221,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Appenzell I.Rh.",
+        "cantonCode": "AI",
         "prices": [
             {
                 "nofRooms": "2",
@@ -246,7 +246,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Basel-Landschaft",
+        "cantonCode": "BL",
         "prices": [
             {
                 "nofRooms": "1",
@@ -275,7 +275,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Basel-Stadt",
+        "cantonCode": "BS",
         "prices": [
             {
                 "nofRooms": "1",
@@ -304,7 +304,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Bern",
+        "cantonCode": "BE",
         "prices": [
             {
                 "nofRooms": "1",
@@ -333,7 +333,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Freiburg",
+        "cantonCode": "FR",
         "prices": [
             {
                 "nofRooms": "1",
@@ -362,7 +362,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Genf",
+        "cantonCode": "GE",
         "prices": [
             {
                 "nofRooms": "1",
@@ -391,7 +391,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Glarus",
+        "cantonCode": "GL",
         "prices": [
             {
                 "nofRooms": "1",
@@ -420,7 +420,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Graubünden",
+        "cantonCode": "GR",
         "prices": [
             {
                 "nofRooms": "1",
@@ -449,7 +449,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Jura",
+        "cantonCode": "JU",
         "prices": [
             {
                 "nofRooms": "1",
@@ -478,7 +478,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Luzern",
+        "cantonCode": "LU",
         "prices": [
             {
                 "nofRooms": "1",
@@ -507,7 +507,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Neuenburg",
+        "cantonCode": "NE",
         "prices": [
             {
                 "nofRooms": "1",
@@ -536,7 +536,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Nidwalden",
+        "cantonCode": "NW",
         "prices": [
             {
                 "nofRooms": "1",
@@ -565,7 +565,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Obwalden",
+        "cantonCode": "OW",
         "prices": [
             {
                 "nofRooms": "1",
@@ -594,7 +594,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Schaffhausen",
+        "cantonCode": "SH",
         "prices": [
             {
                 "nofRooms": "1",
@@ -623,7 +623,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Schwyz",
+        "cantonCode": "SZ",
         "prices": [
             {
                 "nofRooms": "1",
@@ -652,7 +652,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Solothurn",
+        "cantonCode": "SO",
         "prices": [
             {
                 "nofRooms": "1",
@@ -681,7 +681,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "St.Gallen",
+        "cantonCode": "SG",
         "prices": [
             {
                 "nofRooms": "1",
@@ -710,7 +710,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Tessin",
+        "cantonCode": "TI",
         "prices": [
             {
                 "nofRooms": "1",
@@ -739,7 +739,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Thurgau",
+        "cantonCode": "TG",
         "prices": [
             {
                 "nofRooms": "1",
@@ -768,7 +768,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Uri",
+        "cantonCode": "UR",
         "prices": [
             {
                 "nofRooms": "1",
@@ -797,7 +797,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Waadt",
+        "cantonCode": "VD",
         "prices": [
             {
                 "nofRooms": "1",
@@ -826,7 +826,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Wallis",
+        "cantonCode": "VS",
         "prices": [
             {
                 "nofRooms": "1",
@@ -855,7 +855,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Zug",
+        "cantonCode": "ZG",
         "prices": [
             {
                 "nofRooms": "1",
@@ -884,7 +884,7 @@ const cantonData: CantonRentPrice[] = [
         ]
     },
     {
-        "cantonName": "Zürich",
+        "cantonCode": "ZH",
         "prices": [
             {
                 "nofRooms": "1",

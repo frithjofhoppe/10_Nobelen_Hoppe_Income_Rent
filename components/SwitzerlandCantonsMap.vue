@@ -84,9 +84,12 @@ async function renderMap(data) {
     .translate([width / 2, height / 2])
 
   const path = d3.geoPath().projection(projection)
-  const minValue = d3.min(data, d => d.value.centralValue)  
-  const maxValue = d3.max(data, d => d.value.centralValue)  
-
+  const validData = data
+  .map(d => Number(d.value?.centralValue))
+  .filter(v => Number.isFinite(v)) // removes NaN, null, undefine
+  const minValue = d3.min(validData)  
+  const maxValue = d3.max(validData)
+  const middleValue = Math.round((minValue + maxValue) / 2)  
   const colorScale = d3.scaleSequential(d3.interpolateYlGnBu)
     .domain([minValue, maxValue])
 
@@ -110,16 +113,21 @@ async function renderMap(data) {
     .attr('d', path)
     .attr('fill', (d) => {
       const avgRentPrice = getCenterValueForId(data, d.id)
-      return avgRentPrice ? colorScale(avgRentPrice) : '#ccc' // Use #ccc for missing data
+      return avgRentPrice == 'NaN' ? '#D7D7D7' : colorScale(avgRentPrice) // Use #ccc for missing data
     })
     .attr('stroke', '#fff')
     .attr('stroke-width', 0.5)
     .on('mouseover', function (event, d) {
-      d3.select(this)
-        .attr('fill', '#f00')
 
       const cantonEntry = mapping.find(x => x.cantonCode == graphicIdMapping[d.id])
 
+      const centerValue = getCenterValueForId(data, d.id)
+
+      if(centerValue != 'NaN') {
+        d3.select(this)
+        .attr('stroke', colorScale(centerValue))
+        .attr('stroke-width', 3)
+        .attr('fill', '#ffffff')
       const entry = data.find(entry => entry.region === cantonEntry.regionName)
       tooltip
         .html(`
@@ -146,11 +154,15 @@ async function renderMap(data) {
         .style('left', `${adjustedLeft}px`)
         .style('top', `${adjustedTop}px`)
         .style('opacity', 1)
+      }
     })
     .on('mouseout', function () {
+      d3.select(this)
+      .attr('stroke', '#fff')   
+      .attr('stroke-width', 0.5)
       d3.select(this).attr('fill', (d) => {
         const avgRentPrice = getCenterValueForId(data, d.id)
-        return avgRentPrice ? colorScale(avgRentPrice) : '#ccc'
+        return avgRentPrice == 'NaN' ? '#D7D7D7' : colorScale(avgRentPrice) // Use #ccc for missing data
       })
       tooltip.style('opacity', 0)
     })
@@ -167,8 +179,8 @@ async function renderMap(data) {
     .range([0, 200])
 
   const legendAxis = d3.axisBottom(legendScale)
-    .ticks(5)
-    .tickFormat(d3.format('$,.0f'))
+  .tickValues([minValue, middleValue, maxValue]) // only 3 ticks
+  .tickFormat(d => `CHF ${Math.round(d).toLocaleString('de-CH')}`)
 
   legend.append('g')
     .attr('transform', 'translate(0, 20)')
