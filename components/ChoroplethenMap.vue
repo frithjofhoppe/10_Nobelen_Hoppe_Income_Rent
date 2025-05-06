@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useIncomeData, GeographicRegion } from '@/composable/data'
+import { useIncomeData } from '@/composable/data'
 
-const { data, pending, error } = useIncomeData()
+const { data } = useIncomeData()
 
 // Reactive filters — now single values
 const selectedEducation = ref<string | null>(null)
@@ -27,6 +27,22 @@ const filteredData = computed(() => {
 const areFiltersApplied = computed(() => {
   return !!(selectedEducation.value && selectedPosition.value && selectedGender.value)
 })
+
+
+watchEffect(() => {
+  if (data.value) {
+    if (!selectedEducation.value && data.value.educations?.length) {
+      selectedEducation.value = data.value.educations[0]
+    }
+    if (!selectedPosition.value && data.value.professionalPositions?.length) {
+      selectedPosition.value = data.value.professionalPositions[0]
+    }
+    if (!selectedGender.value && data.value.genders?.length) {
+      selectedGender.value = data.value.genders[0]
+    }
+  }
+})
+
 </script>
 
 <template>
@@ -86,15 +102,19 @@ const areFiltersApplied = computed(() => {
       </div>
     </div>
 
-    <div v-if="filteredData" class="w-full h-200 max-w-4xl p-4 mb-6">
-      <SwitzerlandCantonsMap
-        v-if="filteredData && areFiltersApplied"
-        class="w-full h-full"
-        :data="filteredData"
-      />
-      <p v-if="!areFiltersApplied">
-        No filter applied. Please select some
-      </p>
+    <div class="w-full h-200 max-w-4xl p-4 mb-6">
+      <client-only>
+        <template #fallback>
+          <div class="w-full h-64 flex items-center justify-center text-gray-500">
+            Lädt Karte...
+          </div>
+        </template>
+        <SwitzerlandCantonsMap
+          v-if="filteredData && areFiltersApplied"
+          class="w-full h-full"
+          :data="filteredData"
+        />
+      </client-only>
     </div>
   </section>
 </template>

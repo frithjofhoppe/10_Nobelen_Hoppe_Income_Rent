@@ -10,7 +10,6 @@ import * as topojson from 'topojson-client'
 import { ref, nextTick } from 'vue'
 import { useRegionCantonMapping } from '@/composable/data'
 
-
 const mapping = useRegionCantonMapping()
 const svgRef = ref()
 const props = defineProps({
