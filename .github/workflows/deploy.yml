@@ -18,11 +18,25 @@ jobs:
         with:
           node-version: 18
 
+      - name: Cache npm and node_modules 💾
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies 📦
         run: npm ci
 
       - name: Generate static site ⚙️
-        run: npm run generate
+        run: |
+          npm run generate
+          echo "::group::Output folder contents"
+          ls -la .output/public || echo "⚠️ Output not found!"
+          echo "::endgroup::"
 
       - name: Deploy to GitHub Pages 🚀
         uses: peaceiris/actions-gh-pages@v3
