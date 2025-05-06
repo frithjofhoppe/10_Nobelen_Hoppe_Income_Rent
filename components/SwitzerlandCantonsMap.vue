@@ -8,13 +8,12 @@
 <script setup>
 import * as d3 from 'd3'
 import * as topojson from 'topojson-client'
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { useRegionCantonMapping } from '@/composable/data'
 
 
 const mapping = useRegionCantonMapping()
 const svgRef = ref()
-
 const props = defineProps({
   data : {
     type: Object,
@@ -22,7 +21,7 @@ const props = defineProps({
   }
 })
 
-const cantonMapping = {
+const graphicIdMapping = {
       1: 'ZH',
       2: 'BE',
       3: 'LU',
@@ -51,23 +50,9 @@ const cantonMapping = {
       26: 'JU',
 }
 
-const cantonRentPrices = {
-  "Aargau": 2244.0,
-  "Appenzell A.Rh.": 2044.0,
-  "Genf": 1996.0,
-  "Graubünden": 1815.0,
-  "Jura": 1391.0,
-  "Luzern": 2383.0,
-  "Neuenburg": 1995.0,
-  "Nidwalden": 2235.0,
-  "Obwalden": 2225.0,
-  "Schaffhausen": 2168.0,
-  "Schwyz": 2801.0,
-  "Solothurn": 2051.0,
-  "St.Gallen": 1996.0,
-  "Tessin": 2127.0,
-  "Thurgau": 2153.0,
-  "Uri": 1372.0,
+function getCenterValueForId(data, id) {
+  const cantonEntry = mapping.find(x => x.cantonCode == graphicIdMapping[id])
+  return data.find(entry => entry.region === cantonEntry.regionName).value.centralValue
 }
 
 async function renderMap(data) {
@@ -94,9 +79,11 @@ async function renderMap(data) {
     .translate([width / 2, height / 2])
 
   const path = d3.geoPath().projection(projection)
+  const minValue = d3.min(data, d => d.value.centralValue)  
+  const maxValue = d3.max(data, d => d.value.centralValue)  
 
   const colorScale = d3.scaleSequential(d3.interpolateYlGnBu)
-    .domain([1000, 3000])
+    .domain([minValue, maxValue])
 
   // Create the tooltip once at the start
   const tooltip = d3.select('body')
@@ -117,22 +104,28 @@ async function renderMap(data) {
     .append('path')
     .attr('d', path)
     .attr('fill', (d) => {
-      const cantonName = d.properties.name
-      const avgRentPrice = cantonRentPrices[cantonName]
+      const avgRentPrice = getCenterValueForId(data, d.id)
       return avgRentPrice ? colorScale(avgRentPrice) : '#ccc' // Use #ccc for missing data
     })
     .attr('stroke', '#fff')
     .attr('stroke-width', 0.5)
     .on('mouseover', function (event, d) {
-      const cantonName = d.properties.name
-      const avgRentPrice = cantonRentPrices[cantonName]
       d3.select(this)
         .attr('fill', '#f00')
 
-      const cantonEntry = mapping.find(x => x.cantonCode == cantonMapping[d.id])
+      const cantonEntry = mapping.find(x => x.cantonCode == graphicIdMapping[d.id])
 
+      const entry = data.find(entry => entry.region === cantonEntry.regionName)
       tooltip
-        .html(`<strong>${cantonEntry.cantonName}</strong><br>Miete ${data.find(entry => entry.region === cantonEntry.regionName).value.centralValue} CHF`)
+        .html(`
+          <strong>${cantonEntry.cantonName}</strong>
+          <ul>
+            <li>p10 ${entry.value.p10}</li>
+            <li>p25 ${entry.value.p25}</li>
+            <li>p75 ${entry.value.p75}</li>
+            <li>centralValue ${entry.value.centralValue}</li>
+          </ul>
+        `)
 
       const tooltipWidth = tooltip.node().offsetWidth
       const tooltipHeight = tooltip.node().offsetHeight
@@ -151,8 +144,7 @@ async function renderMap(data) {
     })
     .on('mouseout', function () {
       d3.select(this).attr('fill', (d) => {
-        const cantonName = d.properties.name
-        const avgRentPrice = cantonRentPrices[cantonName]
+        const avgRentPrice = getCenterValueForId(data, d.id)
         return avgRentPrice ? colorScale(avgRentPrice) : '#ccc'
       })
       tooltip.style('opacity', 0)
@@ -163,7 +155,7 @@ async function renderMap(data) {
     .attr('transform', 'translate(20, 20)')
 
   const legendScale = d3.scaleLinear()
-    .domain([1000, 3000])
+    .domain([minValue, maxValue])
     .range([0, 200])
 
   const legendAxis = d3.axisBottom(legendScale)
@@ -189,11 +181,11 @@ async function renderMap(data) {
 
   gradient.append('stop')
     .attr('offset', '0%')
-    .style('stop-color', colorScale(1000))
+    .style('stop-color', colorScale(minValue))
 
   gradient.append('stop')
     .attr('offset', '100%')
-    .style('stop-color', colorScale(3000))
+    .style('stop-color', colorScale(maxValue))
 }
 
 
@@ -201,8 +193,8 @@ watch(() => props.data, async (newData) => {
   if (newData) {
     await renderMap(      newData
     .filter(entry => entry.professionalPosition === 'Ohne Kaderfunktion')
-    .filter(entry => entry.gender = 'Frauen')
-    .filter(entry => entry.education === 'Universitäre Hochschule (UNI,ETH)')
+    .filter(entry => entry.gender === 'Frauen')
+    .filter(entry => entry.education === 'Lehrpatent')
     )
   }
 }, { immediate: true })
