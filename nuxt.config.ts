@@ -20,5 +20,8 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/image',
     '@nuxt/ui'
-  ]
+  ],
+  app: {
+    baseURL: '/10_Nobelen_Hoppe_Income_Rent/'
+  }
 });
