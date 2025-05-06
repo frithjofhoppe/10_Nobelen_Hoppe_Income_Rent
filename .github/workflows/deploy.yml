@@ -38,8 +38,12 @@ jobs:
           ls -la .output/public || echo "⚠️ Output not found!"
           echo "::endgroup::"
 
-      - name: Deploy to GitHub Pages 🚀
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload static files as artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3 # or specific "vX.X.X" version tag for this action
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .output/public
+          path: .output/public/
+        
+      - name: Deploy to GitHub Pages
+        id: deployment_pages
+        uses: actions/deploy-pages@v4
