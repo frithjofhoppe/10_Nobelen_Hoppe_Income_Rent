@@ -23,16 +23,18 @@ const filteredData = computed(() => {
     return matchEducation && matchPosition && matchGender
   })
 })
+
+const areFiltersApplied = computed(() => {
+  return selectedEducations.value.length > 0 && selectedPositions.value.length > 0 && selectedGenders.value.length > 0
+})
+  
 </script>
 
 <template>
   <section class="min-h-screen p-10 flex flex-col justify-center items-center">
-    <span v-if="filteredData">
-      <SwitzerlandCantonsMap :data="filteredData"/>
-    </span>
     <h2 class="text-3xl font-semibold mb-4">Regionale Mietpreisunterschiede</h2>
+    
     <div id="map" class="w-full max-w-4xl h-auto border border-gray-200 p-4">
-
       <div class="mb-6 grid grid-cols-3 gap-4">
         <div>
           <label class="font-medium">Ausbildung</label>
@@ -64,15 +66,10 @@ const filteredData = computed(() => {
           </div>
         </div>
       </div>
+    </div>
 
-      <ul class="list-disc pl-5">
-        <li v-for="(entry, index) in filteredData" :key="index">
-          <strong>{{ entry.region }}</strong>, {{ entry.education }}, {{ entry.professionalPosition }}, {{
-            entry.gender
-          }}:
-          {{ entry.value.centralValue }} CHF (Median)
-        </li>
-      </ul>
+    <div v-if="filteredData" class="w-full h-200 max-w-4xl p-4 mb-6">
+      <SwitzerlandCantonsMap v-if="filteredData && areFiltersApplied" class="w-full h-full" :data="filteredData"/>
     </div>
   </section>
 </template>

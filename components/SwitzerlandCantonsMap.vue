@@ -1,14 +1,13 @@
 <template>
   <div>
-    <h2 class="text-3xl font-semibold mb-4">Kantone der Schweiz</h2>
-    <svg ref="svgRef" class="w-full h-auto" />
+    <svg ref="svgRef" class="w-full h-full" />
   </div>
 </template>
 
 <script setup>
 import * as d3 from 'd3'
 import * as topojson from 'topojson-client'
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 import { useRegionCantonMapping } from '@/composable/data'
 
 
@@ -56,8 +55,11 @@ function getCenterValueForId(data, id) {
 }
 
 async function renderMap(data) {
-  const width = 800
-  const height = 600
+
+  const bbox = svgRef.value.getBoundingClientRect()
+  const width = bbox.width
+  const height = bbox.height
+
 
   // Load TopoJSON data
   const res = await fetch('https://unpkg.com/swiss-maps@4/2021/ch-combined.json')
@@ -70,8 +72,11 @@ async function renderMap(data) {
     return
   }
 
+  d3.select(svgRef.value).selectAll('*').remove() // Clear previous content
+
   const svg = d3.select(svgRef.value)
     .attr('viewBox', [0, 0, width, height])
+    .attr('preserveAspectRatio', 'xMidYMid meet')
 
   const projection = d3.geoMercator()
     .center([8.3, 46.8])
@@ -150,9 +155,12 @@ async function renderMap(data) {
       tooltip.style('opacity', 0)
     })
 
+    const legendWidth = 200
+    const legendX = (width - legendWidth) / 2
+
   // Optional: Add a legend for the color scale
   const legend = svg.append('g')
-    .attr('transform', 'translate(20, 20)')
+    .attr('transform', `translate(${legendX}, 0)`)
 
   const legendScale = d3.scaleLinear()
     .domain([minValue, maxValue])
@@ -189,22 +197,25 @@ async function renderMap(data) {
 }
 
 
-watch(() => props.data, async (newData) => {
-  if (newData) {
-    await renderMap(      newData
-    .filter(entry => entry.professionalPosition === 'Ohne Kaderfunktion')
-    .filter(entry => entry.gender === 'Frauen')
-    .filter(entry => entry.education === 'Lehrpatent')
-    )
+watch([() => props.data], async ([newData]) => {
+  if (newData && newData.length > 0) {
+    await renderMap(newData)
   }
-}, { immediate: true })
+})
+
+onMounted(async () => {
+  if (props.data) {
+    await renderMap(props.data)
+  }
+})
 
 </script>
 
 <style scoped>
 svg {
-  max-width: 100%;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .tooltip {
