@@ -1,55 +1,36 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useIncomeData, useRegionCantonMapping, type RegionCantonMapping, type ResultEntry } from '@/composable/data'
+import { useRentPriceData } from '@/composable/data'
+import type { SwitzerlandMapEntry } from './SwitzerlandCantonsMap.vue'
 
-const { data } = useIncomeData()
+const rentPrices = useRentPriceData()
 
 // Reactive filters — now single values
-const selectedEducation = ref<string | null>(null)
-const selectedPosition = ref<string | null>(null)
-const selectedGender = ref<string | null>(null)
+const selectedRoomOption = ref<string | null>(null);
+const uniqueRoomOptions = computed(() => new Set(rentPrices.flatMap(entry => entry.prices.map(price => price.nofRooms))));
 
-const allEntries = computed(() => data.value?.entries ?? [])
-
-const uniqueEducations = computed(() => data.value?.educations ?? [])
-const uniquePositions = computed(() => data.value?.professionalPositions ?? [])
-const uniqueGenders = computed(() => data.value?.genders ?? [])
-
-const filteredData = computed(() => {
-  return allEntries.value.filter(entry => {
-    const matchEducation = !selectedEducation.value || entry.education === selectedEducation.value
-    const matchPosition = !selectedPosition.value || entry.professionalPosition === selectedPosition.value
-    const matchGender = !selectedGender.value || entry.gender === selectedGender.value
-    return matchEducation && matchPosition && matchGender
-  })
-})
-
-const mapping = useRegionCantonMapping()
+const filteredRentData = computed(
+  () => {
+    return rentPrices
+    .filter(x => x.prices.some(price => price.nofRooms === selectedRoomOption.value))
+    .map(x => {
+      const cantonEntry = x.prices.find(price => price.nofRooms === selectedRoomOption.value)
+      return {
+        value: cantonEntry ? cantonEntry.avgPrice : 'NaN',
+        cantonCode: x.cantonCode
+      } as SwitzerlandMapEntry
+    })
+  }
+)
 
 const areFiltersApplied = computed(() => {
-  return !!(selectedEducation.value && selectedPosition.value && selectedGender.value)
+  return !!(selectedRoomOption.value)
 })
 
-const mapRegionToCanton = (filteredData: ResultEntry[]) => (entry: RegionCantonMapping) =>  {
-            const cantonEntry = filteredData.find(x => x.region === entry.regionName)
-            return {
-              ...entry,
-              value: cantonEntry ? cantonEntry.value.centralValue : 'NaN',
-              cantonCode: entry.cantonCode
-            }
-          }
-
-
 watchEffect(() => {
-  if (data.value) {
-    if (!selectedEducation.value && data.value.educations?.length) {
-      selectedEducation.value = data.value.educations[0]
-    }
-    if (!selectedPosition.value && data.value.professionalPositions?.length) {
-      selectedPosition.value = data.value.professionalPositions[0]
-    }
-    if (!selectedGender.value && data.value.genders?.length) {
-      selectedGender.value = data.value.genders[0]
+  if (rentPrices) {
+    if (!selectedRoomOption.value && uniqueRoomOptions.value.size) {
+      selectedRoomOption.value = Array.from(uniqueRoomOptions.value)[0]
     }
   }
 })
@@ -58,52 +39,19 @@ watchEffect(() => {
 
 <template>
   <section class="min-h-screen p-10 flex flex-col justify-center items-center">
-    <h2 class="text-3xl font-semibold mb-4">Einkommen nach Kanton</h2>
+    <h2 class="text-3xl font-semibold mb-4">Mietpreise nach Kanton</h2>
     <div id="map" class="w-full max-w-4xl h-auto border border-gray-200 p-4">
       <div class="mb-6 grid grid-cols-3 gap-4">
-
-        <!-- Ausbildung -->
+        <!-- Anzahl an Räumen -->
         <div>
-          <label class="font-medium">Ausbildung</label>
-          <div v-for="item in uniqueEducations" :key="item">
-            <label>
-              <input
-                type="radio"
-                name="education"
-                :value="item"
-                v-model="selectedEducation"
-              />
-              {{ item }}
-            </label>
-          </div>
-        </div>
-
-        <!-- Berufliche Stellung -->
-        <div>
-          <label class="font-medium">Berufliche Stellung</label>
-          <div v-for="item in uniquePositions" :key="item">
-            <label>
-              <input
-                type="radio"
-                name="position"
-                :value="item"
-                v-model="selectedPosition"
-              />
-              {{ item }}
-            </label>
-          </div>
-        </div>
-
-        <!-- Geschlecht -->
-        <div>
-          <label class="font-medium">Geschlecht</label>
-          <div v-for="item in uniqueGenders" :key="item">
+          <label class="font-medium">Anzahl an Zimmern</label>
+          <div v-for="item in uniqueRoomOptions" :key="item">
             <label>
               <input
                 type="radio"
                 name="gender"
                 :value="item"
-                v-model="selectedGender"
+                v-model="selectedRoomOption"
               />
               {{ item }}
             </label>
@@ -121,9 +69,9 @@ watchEffect(() => {
           </div>
         </template>
         <SwitzerlandCantonsMap
-          v-if="filteredData && areFiltersApplied"
+          v-if="filteredRentData && areFiltersApplied"
           class="w-full h-full"
-          :data="mapping.map(mapRegionToCanton(filteredData))"
+          :data="filteredRentData"
         />
       </client-only>
     </div>
