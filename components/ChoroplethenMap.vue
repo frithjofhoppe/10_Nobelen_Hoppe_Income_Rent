@@ -42,16 +42,18 @@ watchEffect(() => {
     <h2 class="text-3xl font-semibold mb-4">Mietpreise nach Kanton</h2>
     <div id="map" class="w-full max-w-4xl h-auto border border-gray-200 p-4">
       <div class="mb-6 grid grid-cols-3 gap-4">
-        <!-- Anzahl an Räumen -->
+        
+        
+                <!-- Anzahl an Räumen -->
         <div>
           <label class="font-medium">Anzahl an Zimmern</label>
-          <div v-for="item in uniqueRoomOptions" :key="item">
-            <label>
-              <input type="radio" name="gender" :value="item" v-model="selectedRoomOption" />
+          <select v-model="selectedRoomOption" class="border border-gray-300 rounded p-2 w-full">
+            <option v-for="item in uniqueRoomOptions" :key="item" :value="item">
               {{ item }}
-            </label>
-          </div>
+            </option>
+          </select>
         </div>
+        
       </div>
     </div>
 

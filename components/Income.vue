@@ -2,7 +2,6 @@
 import { ref, computed } from 'vue'
 import { useIncomeData, useRegionCantonMapping, type RegionCantonMapping, type ResultEntry } from '@/composable/data'
 import type { SwitzerlandMapEntry } from './SwitzerlandCantonsMap.vue'
-import { Income } from '#components'
 
 const { data } = useIncomeData()
 
@@ -10,8 +9,6 @@ const { data } = useIncomeData()
 const selectedEducation = ref<string | null>(null)
 const selectedPosition = ref<string | null>(null)
 const selectedGender = ref<string | null>(null)
-const selectedRoomOption = ref<string | null>(null);
-
 const allEntries = computed(() => data.value?.entries ?? [])
 
 const uniqueEducations = computed(() => data.value?.educations ?? [])
@@ -68,35 +65,32 @@ watchEffect(() => {
 
         <!-- Ausbildung -->
         <div>
-          <label class="font-medium">Ausbildung</label>
-          <div v-for="item in uniqueEducations" :key="item">
-            <label>
-              <input type="radio" name="education" :value="item" v-model="selectedEducation" />
+          <label class="font-medium" for="education-select">Ausbildung</label>
+          <select id="education-select" v-model="selectedEducation" class="w-full mt-2 p-2 border rounded">
+            <option v-for="item in uniqueEducations" :key="item" :value="item">
               {{ item }}
-            </label>
-          </div>
+            </option>
+          </select>
         </div>
 
         <!-- Berufliche Stellung -->
         <div>
-          <label class="font-medium">Berufliche Stellung</label>
-          <div v-for="item in uniquePositions" :key="item">
-            <label>
-              <input type="radio" name="position" :value="item" v-model="selectedPosition" />
+          <label class="font-medium" for="position-select">Berufliche Stellung</label>
+          <select id="position-select" v-model="selectedPosition" class="w-full mt-2 p-2 border rounded">
+            <option v-for="item in uniquePositions" :key="item" :value="item">
               {{ item }}
-            </label>
-          </div>
+            </option>
+          </select>
         </div>
 
         <!-- Geschlecht -->
         <div>
-          <label class="font-medium">Geschlecht</label>
-          <div v-for="item in uniqueGenders" :key="item">
-            <label>
-              <input type="radio" name="gender" :value="item" v-model="selectedGender" />
+          <label class="font-medium" for="gender-select">Geschlecht</label>
+          <select id="gender-select" v-model="selectedGender" class="w-full mt-2 p-2 border rounded">
+            <option v-for="item in uniqueGenders" :key="item" :value="item">
               {{ item }}
-            </label>
-          </div>
+            </option>
+          </select>
         </div>
 
       </div>
