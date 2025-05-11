@@ -4,11 +4,16 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import * as d3 from 'd3'
 import * as topojson from 'topojson-client'
-import { ref, nextTick } from 'vue'
+import { ref } from 'vue'
 import { useRegionCantonMapping } from '@/composable/data'
+
+export interface SwitzerlandMapEntry {
+  cantonCode: string,
+  value: string
+};
 
 const mapping = useRegionCantonMapping()
 const svgRef = ref()
@@ -19,7 +24,7 @@ const props = defineProps({
   }
 })
 
-const graphicIdMapping = {
+const graphicIdMapping: {[key: number]: string}  = {
       1: 'ZH',
       2: 'BE',
       3: 'LU',
@@ -48,12 +53,12 @@ const graphicIdMapping = {
       26: 'JU',
 }
 
-function getCenterValueForId(data, id) {
-  const cantonEntry = mapping.find(x => x.cantonCode == graphicIdMapping[id])
-  return data.find(entry => entry.region === cantonEntry.regionName).value.centralValue
+function getCenterValueForId(data: SwitzerlandMapEntry[], id: number): string {
+  const x = data.find(entry => entry.cantonCode === graphicIdMapping[id])
+  return x ? x.value : 'NaN'
 }
 
-async function renderMap(data) {
+async function renderMap(data: SwitzerlandMapEntry[]) {
 
   const bbox = svgRef.value.getBoundingClientRect()
   const width = bbox.width
@@ -84,7 +89,7 @@ async function renderMap(data) {
 
   const path = d3.geoPath().projection(projection)
   const validData = data
-  .map(d => Number(d.value?.centralValue))
+  .map(d => Number(d.value))
   .filter(v => Number.isFinite(v)) // removes NaN, null, undefine
   const minValue = d3.min(validData)  
   const maxValue = d3.max(validData)
@@ -119,24 +124,17 @@ async function renderMap(data) {
     .on('mouseover', function (event, d) {
 
       const cantonEntry = mapping.find(x => x.cantonCode == graphicIdMapping[d.id])
-
       const centerValue = getCenterValueForId(data, d.id)
 
-      if(centerValue != 'NaN') {
+      if(centerValue != 'NaN' && cantonEntry) {
         d3.select(this)
         .attr('stroke', colorScale(centerValue))
         .attr('stroke-width', 3)
         .attr('fill', '#ffffff')
-      const entry = data.find(entry => entry.region === cantonEntry.regionName)
       tooltip
         .html(`
-          <strong>${cantonEntry.cantonName}</strong>
-          <ul>
-            <li>p10 ${entry.value.p10}</li>
-            <li>p25 ${entry.value.p25}</li>
-            <li>p75 ${entry.value.p75}</li>
-            <li>centralValue ${entry.value.centralValue}</li>
-          </ul>
+          <strong>${cantonEntry.cantonName}</strong> <br>
+          ${centerValue}
         `)
 
       const tooltipWidth = tooltip.node().offsetWidth
@@ -210,13 +208,13 @@ async function renderMap(data) {
 
 watch([() => props.data], async ([newData]) => {
   if (newData && newData.length > 0) {
-    await renderMap(newData)
+    await renderMap(newData as SwitzerlandMapEntry[])
   }
 })
 
 onMounted(async () => {
   if (props.data) {
-    await renderMap(props.data)
+    await renderMap(props.data as SwitzerlandMapEntry[])
   }
 })
 

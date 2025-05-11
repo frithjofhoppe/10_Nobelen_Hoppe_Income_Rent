@@ -9,7 +9,7 @@ interface IncomeResultSet {
     genders: string[],
 }
 
-interface ResultEntry {
+export interface ResultEntry {
     // Rows
     region: GeographicRegion, // Grossregion CH
     education: string, // Abschluss
@@ -39,7 +39,7 @@ interface DataValue {
 }
 
 
-interface RegionCantonMapping {
+export interface RegionCantonMapping {
     cantonCode: string,
     cantonName: string,
     regionName: GeographicRegion

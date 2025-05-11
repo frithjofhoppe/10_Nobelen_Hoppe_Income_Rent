@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useIncomeData } from '@/composable/data'
+import { useIncomeData, useRegionCantonMapping, type RegionCantonMapping, type ResultEntry } from '@/composable/data'
 
 const { data } = useIncomeData()
 
@@ -24,9 +24,20 @@ const filteredData = computed(() => {
   })
 })
 
+const mapping = useRegionCantonMapping()
+
 const areFiltersApplied = computed(() => {
   return !!(selectedEducation.value && selectedPosition.value && selectedGender.value)
 })
+
+const mapRegionToCanton = (filteredData: ResultEntry[]) => (entry: RegionCantonMapping) =>  {
+            const cantonEntry = filteredData.find(x => x.region === entry.regionName)
+            return {
+              ...entry,
+              value: cantonEntry ? cantonEntry.value.centralValue : 'NaN',
+              cantonCode: entry.cantonCode
+            }
+          }
 
 
 watchEffect(() => {
@@ -112,7 +123,7 @@ watchEffect(() => {
         <SwitzerlandCantonsMap
           v-if="filteredData && areFiltersApplied"
           class="w-full h-full"
-          :data="filteredData"
+          :data="mapping.map(mapRegionToCanton(filteredData))"
         />
       </client-only>
     </div>
