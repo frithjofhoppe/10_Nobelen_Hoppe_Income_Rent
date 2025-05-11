@@ -44,7 +44,6 @@ const mapRegionToCanton = (filteredData: ResultEntry[]) => (entry: RegionCantonM
 
 watchEffect(() => {
   if (data.value) {
-    console.log(JSON.stringify(data.value))
     if (!selectedEducation.value && data.value.educations?.length) {
       selectedEducation.value = data.value.educations[0]
     }

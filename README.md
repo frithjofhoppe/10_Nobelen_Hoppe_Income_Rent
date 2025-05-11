@@ -1,11 +1,16 @@
-[ivis idea](https://chatgpt.com/share/68109526-9784-8000-9319-001a0092a421)
+# :money_with_wings: 10 Income <-> Rent vizualisation
 
 
-# Nuxt Minimal Starter
+:rocket: The website is automatically deployed as github page [https://frithjofhoppe.github.io/10_Nobelen_Hoppe_Income_Rent/](https://frithjofhoppe.github.io/10_Nobelen_Hoppe_Income_Rent/)
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## :fire: Our idea
+Almost everyone who looked once for an apartment came along the question ... how much can I actually spent on my rent? aaaaand then after the disillusionment ... why is everything so f* expensive :-)?
+
+We took rent and income data from the swiss federal statistical office and compared the data based on the geographic and the education level of earners
 
 ## Setup
+
+Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
 Make sure to install dependencies:
 
@@ -42,22 +47,6 @@ bun run dev
 ```
 
 ## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
 
 Locally preview production build:
 
