@@ -18,39 +18,39 @@ export interface SwitzerlandMapEntry {
 const mapping = useRegionCantonMapping()
 const svgRef = ref()
 const props = defineProps({
-  data : {
+  data: {
     type: Object,
     required: true
   }
 })
 
-const graphicIdMapping: {[key: number]: string}  = {
-      1: 'ZH',
-      2: 'BE',
-      3: 'LU',
-      4: 'UR',
-      5: 'SZ',
-      6: 'OW',
-      7: 'NW',
-      8: 'GL',
-      9: 'ZG',
-      10: 'FR',
-      11: 'SO',
-      12: 'BS',
-      13: 'BL',
-      14: 'SH',
-      15: 'AR',
-      16: 'AI',
-      17: 'SG',
-      18: 'GR',
-      19: 'AG',
-      20: 'TG',
-      21: 'TI',
-      22: 'VD',
-      23: 'VS',
-      24: 'NE',
-      25: 'GE',
-      26: 'JU',
+const graphicIdMapping: { [key: number]: string } = {
+  1: 'ZH',
+  2: 'BE',
+  3: 'LU',
+  4: 'UR',
+  5: 'SZ',
+  6: 'OW',
+  7: 'NW',
+  8: 'GL',
+  9: 'ZG',
+  10: 'FR',
+  11: 'SO',
+  12: 'BS',
+  13: 'BL',
+  14: 'SH',
+  15: 'AR',
+  16: 'AI',
+  17: 'SG',
+  18: 'GR',
+  19: 'AG',
+  20: 'TG',
+  21: 'TI',
+  22: 'VD',
+  23: 'VS',
+  24: 'NE',
+  25: 'GE',
+  26: 'JU',
 }
 
 function getCenterValueForId(data: SwitzerlandMapEntry[], id: number): string {
@@ -89,11 +89,11 @@ async function renderMap(data: SwitzerlandMapEntry[]) {
 
   const path = d3.geoPath().projection(projection)
   const validData = data
-  .map(d => Number(d.value))
-  .filter(v => Number.isFinite(v)) // removes NaN, null, undefine
-  const minValue = d3.min(validData)  
+    .map(d => Number(d.value))
+    .filter(v => Number.isFinite(v)) // removes NaN, null, undefine
+  const minValue = d3.min(validData)
   const maxValue = d3.max(validData)
-  const middleValue = Math.round((minValue + maxValue) / 2)  
+  const middleValue = Math.round((minValue + maxValue) / 2)
   const colorScale = d3.scaleSequential(d3.interpolateYlGnBu)
     .domain([minValue, maxValue])
 
@@ -126,37 +126,37 @@ async function renderMap(data: SwitzerlandMapEntry[]) {
       const cantonEntry = mapping.find(x => x.cantonCode == graphicIdMapping[d.id])
       const centerValue = getCenterValueForId(data, d.id)
 
-      if(centerValue != 'NaN' && cantonEntry) {
+      if (centerValue != 'NaN' && cantonEntry) {
         d3.select(this)
-        .attr('stroke', colorScale(centerValue))
-        .attr('stroke-width', 3)
-        .attr('fill', '#ffffff')
-      tooltip
-        .html(`
+          .attr('stroke', colorScale(centerValue))
+          .attr('stroke-width', 3)
+          .attr('fill', '#ffffff')
+        tooltip
+          .html(`
           <strong>${cantonEntry.cantonName}</strong> <br>
           ${centerValue}
         `)
 
-      const tooltipWidth = tooltip.node().offsetWidth
-      const tooltipHeight = tooltip.node().offsetHeight
+        const tooltipWidth = tooltip.node().offsetWidth
+        const tooltipHeight = tooltip.node().offsetHeight
 
-      const left = event.pageX + 10
-      const top = event.pageY + 10
+        const left = event.pageX + 10
+        const top = event.pageY + 10
 
-      // Prevent tooltip from going out of the screen
-      const adjustedLeft = left + tooltipWidth > window.innerWidth ? left - tooltipWidth - 20 : left
-      const adjustedTop = top + tooltipHeight > window.innerHeight ? top - tooltipHeight - 20 : top
+        // Prevent tooltip from going out of the screen
+        const adjustedLeft = left + tooltipWidth > window.innerWidth ? left - tooltipWidth - 20 : left
+        const adjustedTop = top + tooltipHeight > window.innerHeight ? top - tooltipHeight - 20 : top
 
-      tooltip
-        .style('left', `${adjustedLeft}px`)
-        .style('top', `${adjustedTop}px`)
-        .style('opacity', 1)
+        tooltip
+          .style('left', `${adjustedLeft}px`)
+          .style('top', `${adjustedTop}px`)
+          .style('opacity', 1)
       }
     })
     .on('mouseout', function () {
       d3.select(this)
-      .attr('stroke', '#fff')   
-      .attr('stroke-width', 0.5)
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 0.5)
       d3.select(this).attr('fill', (d) => {
         const avgRentPrice = getCenterValueForId(data, d.id)
         return avgRentPrice == 'NaN' ? '#D7D7D7' : colorScale(avgRentPrice) // Use #ccc for missing data
@@ -164,8 +164,8 @@ async function renderMap(data: SwitzerlandMapEntry[]) {
       tooltip.style('opacity', 0)
     })
 
-    const legendWidth = 200
-    const legendX = (width - legendWidth) / 2
+  const legendWidth = 200
+  const legendX = (width - legendWidth) / 2
 
   // Optional: Add a legend for the color scale
   const legend = svg.append('g')
@@ -176,8 +176,8 @@ async function renderMap(data: SwitzerlandMapEntry[]) {
     .range([0, 200])
 
   const legendAxis = d3.axisBottom(legendScale)
-  .tickValues([minValue, middleValue, maxValue]) // only 3 ticks
-  .tickFormat(d => `CHF ${Math.round(d).toLocaleString('de-CH')}`)
+    .tickValues([minValue, middleValue, maxValue]) // only 3 ticks
+    .tickFormat(d => `CHF ${Math.round(d).toLocaleString('de-CH')}`)
 
   legend.append('g')
     .attr('transform', 'translate(0, 20)')

@@ -4,7 +4,7 @@
     <ChoroplethenMap />
     <Income />
     <IncomeRent />
-
+    <Conclusion />
   </div>
 </template>
 
