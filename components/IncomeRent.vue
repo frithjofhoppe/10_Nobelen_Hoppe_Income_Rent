@@ -38,7 +38,7 @@
         <div>
           <label class="font-medium">Kanton</label>
           <select v-model="selectCanton" class="border border-gray-300 rounded p-2 w-full">
-            <option v-for="item in regionCantonMapping" :key="item.cantonCode" :value="item.cantonCode">
+            <option v-for="item in cantons" :key="item.cantonCode" :value="item.cantonCode">
               {{ item.cantonCode }}
             </option>
           </select>
@@ -83,7 +83,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import * as d3 from 'd3';
-import { useIncomeData, useRegionCantonMapping, type RegionCantonMapping, type ResultEntry, useRentPriceData } from '@/composable/data'
+import { GeographicRegion, useIncomeData, useRegionCantonMapping, useRentPriceData } from '@/composable/data'
 
 const { data } = useIncomeData()
 const rentData = useRentPriceData()
@@ -91,16 +91,20 @@ const regionCantonMapping = useRegionCantonMapping()
 
 const chart = ref(null);
 
-const selectedRoomOption = ref<string | null>(null);
-const uniqueRoomOptions = computed(() => new Set(rentData.flatMap(entry => entry.prices.map(price => price.nofRooms))));
+const cantons = computed(() => {
+  return regionCantonMapping
+    .map(x => x)
+    .sort((a, b) => a.cantonCode.localeCompare(b.cantonCode));
+})
+const uniqueRoomOptions = computed(() => [...new Set(rentData.flatMap(entry => entry.prices.map(price => price.nofRooms)))]);
+const uniquePositions = computed(() => data.value?.professionalPositions ?? []);
+const uniqueGenders = computed(() => data.value?.genders ?? []);
+const uniqueEducations = computed(() => data.value?.educations ?? []);
 
-const selectedPosition = ref<string | null>(null)
-const selectedGender = ref<string | null>(null)
-const selectCanton = ref<string | null>(null)
-
-const uniqueEducations = computed(() => data.value?.educations ?? [])
-const uniquePositions = computed(() => data.value?.professionalPositions ?? [])
-const uniqueGenders = computed(() => data.value?.genders ?? [])
+const selectedRoomOption = ref<string | null>(uniqueRoomOptions.value[0] || null);
+const selectedPosition = ref<string | null>(uniquePositions.value[0] || null);
+const selectedGender = ref<string | null>(uniqueGenders.value[0] || null);
+const selectCanton = ref<string | null>(cantons.value[0]?.cantonCode || null);
 
 
 const areFiltersApplied = computed(() => {
@@ -177,9 +181,17 @@ function renderBarChart(data: LineBarEntry[]) {
   svg.append("g")
     .call(d3.axisLeft(y).tickFormat(d => `${d} CHF`));
 
+
   svg.append("g")
     .attr("transform", `translate(0,${height})`)
-    .call(d3.axisBottom(x0));
+    .call(d3.axisBottom(x0))
+    .selectAll("text")
+    .attr("transform", "rotate(-40)")
+    .style("text-anchor", "end")
+    .text(function (d) {
+      // Truncate long labels
+      return d.length > 15 ? d.slice(0, 15) + "..." : d;
+    });
 
   svg.append("g")
     .selectAll("g")
@@ -251,11 +263,24 @@ function renderBarChart(data: LineBarEntry[]) {
 }
 
 watchEffect(() => {
+  // Ensure default selections are applied if not already set
+  if (!selectedRoomOption.value && uniqueRoomOptions.value.length > 0) {
+    selectedRoomOption.value = uniqueRoomOptions.value[0];
+  }
+  if (!selectedPosition.value && uniquePositions.value.length > 0) {
+    selectedPosition.value = uniquePositions.value[0];
+  }
+  if (!selectedGender.value && uniqueGenders.value.length > 0) {
+    selectedGender.value = uniqueGenders.value[0];
+  }
+  if (!selectCanton.value && regionCantonMapping.length > 0) {
+    selectCanton.value = regionCantonMapping[0].cantonCode;
+  }
+
   if (areFiltersApplied.value) {
     renderBarChart(filteredData.value);
   }
-})
-
+});
 
 </script>
 
