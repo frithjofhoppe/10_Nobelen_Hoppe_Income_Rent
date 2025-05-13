@@ -1,5 +1,5 @@
 <template>
-  <footer class="w-full bg-gray-50 border-t border-gray-200 mt-16">
+  <footer class="w-full bg-gray-50 border-t border-gray-200">
     <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-600 text-sm">
       <div>
         <h2 class="font-semibold text-gray-900 mb-2">Über das Projekt</h2>

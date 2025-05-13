@@ -38,13 +38,10 @@ watchEffect(() => {
 </script>
 
 <template>
-  <section class="min-h-screen p-10 flex flex-col justify-center items-center">
+  <section class="min-h-screen p-10 flex flex-col justify-center items-center mx-auto max-w-4xl">
     <h2 class="text-3xl font-semibold mb-4">Mietpreise nach Kanton</h2>
-    <div id="map" class="w-full max-w-4xl h-auto border border-gray-200 p-4">
+    <div id="map" class="w-full">
       <div class="mb-6 grid grid-cols-3 gap-4">
-        
-        
-                <!-- Anzahl an Räumen -->
         <div>
           <label class="font-medium">Anzahl an Zimmern</label>
           <select v-model="selectedRoomOption" class="border border-gray-300 rounded p-2 w-full">
@@ -96,7 +93,8 @@ watchEffect(() => {
             Lädt Karte...
           </div>
         </template>
-        <SwitzerlandCantonsMap v-if="filteredRentData && areFiltersApplied" class="w-full h-full"
+        <SwitzerlandCantonsMap
+v-if="filteredRentData && areFiltersApplied" class="w-full h-full"
           :data="filteredRentData" />
       </client-only>
     </div>
