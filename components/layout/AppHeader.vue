@@ -5,10 +5,10 @@
         Wohnen in der Schweiz
       </h1>
       <nav class="hidden md:flex space-x-6 text-gray-600 text-lg">
-        <a href="#map" class="hover:text-black transition">Mietpreise</a>
-        <a href="#income-bar" class="hover:text-black transition">Einkommen</a>
-        <a href="#scatter-plot" class="hover:text-black transition">Verhältnis</a>
-        <a href="#fazit" class="hover:text-black transition">Fazit</a>
+        <a href="#rent-canton" class="hover:text-black transition">Mietpreise</a>
+        <a href="#income" class="hover:text-black transition">Einkommen</a>
+        <a href="#income-rent" class="hover:text-black transition">Verhältnis</a>
+        <a href="#conclusion" class="hover:text-black transition">Fazit</a>
       </nav>
     </div>
   </header>

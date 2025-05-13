@@ -1,6 +1,6 @@
 <template>
   <section class="min-h-screen p-10 flex flex-col justify-center items-center mx-auto max-w-4xl">
-    <h2 class="text-3xl font-semibold mb-4">Vergleich von Mietpreisen zu Einkommen</h2>
+    <h2 id="income-rent" class="text-4xl font-semibold mb-8">Vergleich von Mietpreisen zu Einkommen</h2>
 
     <div id="map" class="w-full max-w-4xl h-auto p-4">
       <div class="mb-7 grid grid-cols-3 gap-4">

@@ -1,46 +1,7 @@
-<script setup lang="ts">
-import { ref, computed } from 'vue'
-import { useRentPriceData } from '@/composable/data'
-import type { SwitzerlandMapEntry } from './SwitzerlandCantonsMap.vue'
-
-const rentPrices = useRentPriceData()
-
-// Reactive filters — now single values
-const selectedRoomOption = ref<string | null>(null);
-const uniqueRoomOptions = computed(() => new Set(rentPrices.flatMap(entry => entry.prices.map(price => price.nofRooms))));
-
-const filteredRentData = computed(
-  () => {
-    return rentPrices
-      .filter(x => x.prices.some(price => price.nofRooms === selectedRoomOption.value))
-      .map(x => {
-        const cantonEntry = x.prices.find(price => price.nofRooms === selectedRoomOption.value)
-        return {
-          value: cantonEntry ? cantonEntry.avgPrice : 'NaN',
-          cantonCode: x.cantonCode
-        } as SwitzerlandMapEntry
-      })
-  }
-)
-
-const areFiltersApplied = computed(() => {
-  return !!(selectedRoomOption.value)
-})
-
-watchEffect(() => {
-  if (rentPrices) {
-    if (!selectedRoomOption.value && uniqueRoomOptions.value.size) {
-      selectedRoomOption.value = Array.from(uniqueRoomOptions.value)[0]
-    }
-  }
-})
-
-</script>
-
 <template>
   <section class="min-h-screen p-10 flex flex-col justify-center items-center mx-auto max-w-4xl">
-    <h2 class="text-3xl font-semibold mb-4">Mietpreise nach Kanton</h2>
-    <div id="map" class="w-full">
+    <h2 id="rent-canton" class="text-4xl font-semibold mb-8">Mietpreise nach Kanton</h2>
+    <div class="w-full">
       <div class="mb-6 grid grid-cols-3 gap-4">
         <div>
           <label class="font-medium">Anzahl an Zimmern</label>
@@ -100,3 +61,43 @@ v-if="filteredRentData && areFiltersApplied" class="w-full h-full"
     </div>
   </section>
 </template>
+
+
+<script setup lang="ts">
+import { ref, computed } from 'vue'
+import { useRentPriceData } from '@/composable/data'
+import type { SwitzerlandMapEntry } from './SwitzerlandCantonsMap.vue'
+
+const rentPrices = useRentPriceData()
+
+// Reactive filters — now single values
+const selectedRoomOption = ref<string | null>(null);
+const uniqueRoomOptions = computed(() => new Set(rentPrices.flatMap(entry => entry.prices.map(price => price.nofRooms))));
+
+const filteredRentData = computed(
+  () => {
+    return rentPrices
+      .filter(x => x.prices.some(price => price.nofRooms === selectedRoomOption.value))
+      .map(x => {
+        const cantonEntry = x.prices.find(price => price.nofRooms === selectedRoomOption.value)
+        return {
+          value: cantonEntry ? cantonEntry.avgPrice : 'NaN',
+          cantonCode: x.cantonCode
+        } as SwitzerlandMapEntry
+      })
+  }
+)
+
+const areFiltersApplied = computed(() => {
+  return !!(selectedRoomOption.value)
+})
+
+watchEffect(() => {
+  if (rentPrices) {
+    if (!selectedRoomOption.value && uniqueRoomOptions.value.size) {
+      selectedRoomOption.value = Array.from(uniqueRoomOptions.value)[0]
+    }
+  }
+})
+
+</script>
