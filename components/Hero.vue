@@ -51,6 +51,6 @@ onMounted(async () => {
 });
 
 function scrollToIncome() {
-  router.push({ hash: "#income" });
+  router.push({ hash: "#rent-canton" });
 }
 </script>
