@@ -10,8 +10,6 @@
 
 <script setup>
 
-import * as d3 from 'd3'
-
 onMounted(() => {
   // Beispiel: Setup für Visualisierung später hier einbauen
 })

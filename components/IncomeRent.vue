@@ -1,10 +1,9 @@
 <template>
-  <section class="min-h-screen p-10 flex flex-col justify-center items-center mx-auto max-w-4xl">
+  <MotionSection section-class="min-h-screen p-10 flex flex-col justify-center items-center mx-auto max-w-4xl">
     <h2 id="income-rent" class="text-4xl font-semibold mb-8">Vergleich von Mietpreisen zu Einkommen</h2>
 
     <div id="map" class="w-full max-w-4xl h-auto p-4">
-      <div class="mb-7 grid grid-cols-3 gap-4">
-        <!-- Anzahl an Räumen -->
+      <div class="mb-7 flex flex-wrap gap-4">
         <div>
           <label class="font-medium">Anzahl an Zimmern</label>
           <select v-model="selectedRoomOption" class="border border-gray-300 rounded p-2 w-full">
@@ -77,7 +76,7 @@
 
 
     <svg ref="chart" width="800" height="500"/>
-  </section>
+  </MotionSection>
 </template>
 
 <script setup lang="ts">

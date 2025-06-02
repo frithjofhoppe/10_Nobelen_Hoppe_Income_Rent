@@ -1,5 +1,5 @@
 <template>
-  <AnimatedDiv class="min-h-screen p-10 flex flex-col justify-center items-center bg-gray-50">
+  <MotionSection section-class="min-h-screen p-10 flex flex-col justify-center items-center bg-gray-50">
     <h2 id="income" class="text-4xl font-semibold mb-8 mx-auto max-w-4xl">Einkommen nach Berufsfeld</h2>
     <div class="w-full mx-auto max-w-4xl">
       <div class="mb-6 grid grid-cols-3 gap-4">
@@ -80,7 +80,7 @@
           :data="mapping.map(mapRegionToCanton(filteredData))" />
       </client-only>
     </div>
-  </AnimatedDiv>
+  </MotionSection>
 </template>
 <script setup lang="ts">
 import { ref, computed } from 'vue'

@@ -1,5 +1,5 @@
 <template>
-  <section class="min-h-screen flex flex-col justify-center items-center text-center p-10 bg-gray-100">
+  <MotionSection section-class="min-h-screen flex flex-col justify-center items-center text-center p-10 bg-gray-100">
     <h2 id="conclusion" class="text-3xl font-bold mb-4 mx-auto max-w-4xl">Fazit</h2>
     <div class="mx-auto max-w-4xl text-left">
     <p>
@@ -19,5 +19,5 @@ Zudem verdeutlichen die Daten eine anhaltende strukturelle Lohnungleichheit zwis
 Fazit: Die Wohnsituation in der Schweiz ist nicht nur eine Frage der Miete, sondern auch des Zugangs zu Chancen. Leistbares Wohnen bedeutet mehr als nur ein Dach über dem Kopf – es ist ein zentraler Faktor für soziale Teilhabe, wirtschaftliche Mobilität und Lebensqualität. Eine nachhaltige Wohnpolitik sollte daher stärker auf regionale Ausgewogenheit, faire Löhne und bezahlbaren Wohnraum für alle Bevölkerungsgruppen abzielen.
     </p>
 </div>
-  </section>
+  </MotionSection>
 </template>

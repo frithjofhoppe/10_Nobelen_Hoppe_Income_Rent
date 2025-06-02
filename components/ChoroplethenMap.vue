@@ -1,5 +1,5 @@
 <template>
-  <section class="min-h-screen p-10 flex flex-col justify-center items-center mx-auto max-w-4xl">
+  <MotionSection section-class="min-h-screen p-10 flex flex-col justify-center items-center mx-auto max-w-4xl">
     <h2 id="rent-canton" class="text-4xl font-semibold mb-8">Mietpreise nach Kanton</h2>
     <div class="w-full">
       <div class="mb-6 grid grid-cols-3 gap-4">
@@ -59,8 +59,7 @@ v-if="filteredRentData && areFiltersApplied" class="w-full h-full"
           :data="filteredRentData" />
       </client-only>
     </div>
-  </section>
-</template>
+</MotionSection></template>
 
 
 <script setup lang="ts">

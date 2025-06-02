@@ -1,9 +1,5 @@
 <template>
-  <Motion
-    :initial="{ opacity: 0, x: -100 }"
-    :enter="{ opacity: 1, x: 0 }"
-    :transition="{ duration: 0.8, easing: 'ease-out' }"
-  >
+  <MotionSection>
     <section class="h-[calc(100vh-84px)] bg-gray-50 flex flex-col items-center justify-center text-center p-8">
       <div class="h-1/2 mt-auto mb-10">
         <client-only>
@@ -33,8 +29,8 @@
         </svg>
       </button>
     </section>
-  </Motion>
-</template>
+  </MotionSection>
+  </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
