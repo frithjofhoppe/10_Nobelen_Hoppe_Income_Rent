@@ -69,7 +69,7 @@
         anhaltendes geschlechtsspezifisches Lohnungleichgewicht.
       </p>
     </MotionSection>
-    <div class="w-full h-full max-w-4xl p-4 mb-6">
+    <div class="w-full h-200 max-w-4xl p-4 mb-6">
       <client-only>
         <template #fallback>
           <div class="w-full h-64 flex items-center justify-center text-gray-500">
