@@ -1,7 +1,9 @@
 <template>
-  <MotionSection section-class="min-h-screen p-10 flex flex-col justify-center items-center bg-gray-50">
+  <div class="min-h-screen p-10 flex flex-col justify-center items-center bg-gray-50">
+    <MotionSection>
     <h2 id="income" class="text-4xl font-semibold mb-8 mx-auto max-w-4xl">Einkommen nach Berufsfeld</h2>
-    <div class="w-full mx-auto max-w-4xl">
+    </MotionSection>
+    <MotionSection section-class="w-full mx-auto max-w-4xl">
       <div class="mb-6 grid grid-cols-3 gap-4">
         <!-- Ausbildung -->
         <div>
@@ -31,8 +33,8 @@
           </select>
         </div>
       </div>
-    </div>
-    <div class="mx-auto max-w-4xl">
+    </MotionSection>
+    <MotionSection section-class="mx-auto max-w-4xl">
       <p>
         Die Einkommen in der Schweiz variieren stark in Abhängigkeit von Ausbildungsstand und geografischer Region.
         Personen mit universitärem Abschluss (z. B. UNI, ETH) erzielen die höchsten Medianlöhne, insbesondere in
@@ -66,9 +68,8 @@
         als auch auf Einkommen. Gleichzeitig zeigt sich ein deutliches Stadt-Land- und Nord-Süd-Gefälle sowie ein
         anhaltendes geschlechtsspezifisches Lohnungleichgewicht.
       </p>
-    </div>
-
-    <div class="w-full h-200 max-w-4xl p-4 mb-6">
+    </MotionSection>
+    <div class="w-full h-full max-w-4xl p-4 mb-6">
       <client-only>
         <template #fallback>
           <div class="w-full h-64 flex items-center justify-center text-gray-500">
@@ -76,11 +77,11 @@
           </div>
         </template>
         <SwitzerlandCantonsMap
-          v-if="filteredData && areFiltersApplied" class="w-full h-full"
+          v-if="filteredData && areFiltersApplied" class="size-full"
           :data="mapping.map(mapRegionToCanton(filteredData))" />
       </client-only>
     </div>
-  </MotionSection>
+  </div>
 </template>
 <script setup lang="ts">
 import { ref, computed } from 'vue'

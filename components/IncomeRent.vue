@@ -1,8 +1,9 @@
 <template>
-  <MotionSection section-class="min-h-screen p-10 flex flex-col justify-center items-center mx-auto max-w-4xl">
+  <div class="min-h-screen p-10 flex flex-col justify-center items-center mx-auto max-w-4xl">
+    <MotionSection>
     <h2 id="income-rent" class="text-4xl font-semibold mb-8">Vergleich von Mietpreisen zu Einkommen</h2>
-
-    <div id="map" class="w-full max-w-4xl h-auto p-4">
+</MotionSection>
+    <MotionSection id="map" section-class="w-full max-w-4xl h-auto p-4">
       <div class="mb-7 flex flex-wrap gap-4">
         <div>
           <label class="font-medium">Anzahl an Zimmern</label>
@@ -44,8 +45,8 @@
         </div>
 
       </div>
-    </div>
-
+    </MotionSection>
+<MotionSection>
     <p>
       Wohnen ist nicht für alle gleich leistbar. Einkommensunterschiede und regionale Preisunterschiede führen zu
       ungleichen Belastungen.
@@ -76,7 +77,8 @@
 
 
     <svg ref="chart" width="800" height="500"/>
-  </MotionSection>
+    </MotionSection>
+  </div>
 </template>
 
 <script setup lang="ts">

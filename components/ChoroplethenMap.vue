@@ -1,7 +1,9 @@
 <template>
-  <MotionSection section-class="min-h-screen p-10 flex flex-col justify-center items-center mx-auto max-w-4xl">
+  <div class="min-h-screen p-10 flex flex-col justify-center items-center mx-auto max-w-4xl">
+    <MotionSection>
     <h2 id="rent-canton" class="text-4xl font-semibold mb-8">Mietpreise nach Kanton</h2>
-    <div class="w-full">
+    </MotionSection>
+    <MotionSection section-class="w-full">
       <div class="mb-6 grid grid-cols-3 gap-4">
         <div>
           <label class="font-medium">Anzahl an Zimmern</label>
@@ -13,8 +15,8 @@
         </div>
         
       </div>
-    </div>
-
+    </MotionSection>
+<MotionSection>
     <p>
       Die Mietpreise in der Schweiz variieren je nach Zimmeranzahl deutlich. Für Einzimmerwohnungen liegt der
       Durchschnittspreis kantonsübergreifend zwischen ca. CHF 540 (Jura) und CHF 1'050 (Zürich). Mit zunehmender
@@ -46,7 +48,7 @@
       hingegen erschwinglicher. Besonders bei grossen Wohnungen ist das Preisgefälle zwischen Stadt- und Landkantonen
       deutlich ausgeprägt.
     </p>
-
+</MotionSection>
     <div class="w-full h-200 max-w-4xl p-4 mb-6">
       <client-only>
         <template #fallback>
@@ -59,7 +61,8 @@ v-if="filteredRentData && areFiltersApplied" class="w-full h-full"
           :data="filteredRentData" />
       </client-only>
     </div>
-</MotionSection></template>
+  </div>
+  </template>
 
 
 <script setup lang="ts">
