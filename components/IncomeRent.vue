@@ -3,49 +3,6 @@
     <MotionSection>
       <h2 id="income-rent" class="text-4xl font-semibold mb-8">Comparison of rent prices and incomes</h2>
     </MotionSection>
-    <MotionSection id="map" section-class="w-full max-w-4xl h-auto p-4">
-      <div class="mb-7 flex flex-wrap gap-4">
-        <div>
-          <label class="font-medium">Number of rooms</label>
-          <select v-model="selectedRoomOption" class="border border-gray-300 rounded p-2 w-full">
-            <option v-for="item in uniqueRoomOptions" :key="item" :value="item">
-              {{ item }}
-            </option>
-          </select>
-        </div>
-
-        <!-- Professional position -->
-        <div>
-          <label class="font-medium">Professional position</label>
-          <select v-model="selectedPosition" class="border border-gray-300 rounded p-2 w-full">
-            <option v-for="item in uniquePositions" :key="item" :value="item">
-              {{ item }}
-            </option>
-          </select>
-        </div>
-
-        <!-- Gender -->
-        <div>
-          <label class="font-medium">Gender</label>
-          <select v-model="selectedGender" class="border border-gray-300 rounded p-2 w-full">
-            <option v-for="item in uniqueGenders" :key="item" :value="item">
-              {{ item }}
-            </option>
-          </select>
-        </div>
-
-        <!-- Canton -->
-        <div>
-          <label class="font-medium">Canton</label>
-          <select v-model="selectCanton" class="border border-gray-300 rounded p-2 w-full">
-            <option v-for="item in cantons" :key="item.cantonCode" :value="item.cantonCode">
-              {{ item.cantonCode }}
-            </option>
-          </select>
-        </div>
-
-      </div>
-    </MotionSection>
     <MotionSection>
       <p>
         Housing is not equally affordable for everyone. Income disparities and regional price differences lead to
@@ -77,6 +34,48 @@
         rents are lower and incomes are lower but more affordable in relative terms.
       </p>
 
+    <MotionSection id="map" section-class="w-full max-w-4xl h-auto p-4">
+      <div class="mb-7 flex flex-wrap gap-4 items-end">
+        <div class="flex-1 min-w-[180px]">
+          <label class="font-medium">Number of rooms</label>
+          <select v-model="selectedRoomOption" class="border border-gray-300 rounded p-2 w-full">
+            <option v-for="item in uniqueRoomOptions" :key="item" :value="item">
+              {{ item }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Professional position -->
+        <div class="flex-1 min-w-[180px]">
+          <label class="font-medium">Professional position</label>
+          <select v-model="selectedPosition" class="border border-gray-300 rounded p-2 w-full">
+            <option v-for="item in uniquePositions" :key="item" :value="item">
+              {{ item }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Gender -->
+        <div class="flex-1 min-w-[180px]">
+          <label class="font-medium">Gender</label>
+          <select v-model="selectedGender" class="border border-gray-300 rounded p-2 w-full">
+            <option v-for="item in uniqueGenders" :key="item" :value="item">
+              {{ item }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Canton -->
+        <div class="flex-1 min-w-[180px]">
+          <label class="font-medium">Canton</label>
+          <select v-model="selectCanton" class="border border-gray-300 rounded p-2 w-full">
+            <option v-for="item in cantons" :key="item.cantonCode" :value="item.cantonCode">
+              {{ item.cantonCode }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </MotionSection>
 
       <svg ref="chart" width="800" height="500" />
     </MotionSection>
@@ -229,7 +228,7 @@ function renderBarChart(data: LineBarEntry[]) {
     .attr("transform", `translate(${width - 150}, 0)`);
 
   const legendData = [
-    { label: "Netto Income", color: "#4daf4a" },
+    { label: "Net Income", color: "#4daf4a" },
     { label: "Rent", color: "#e41a1c" },
     { label: "30% rule of thumb", color: "#377eb8", type: "line" }
   ];

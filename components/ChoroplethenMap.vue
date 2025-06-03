@@ -1,20 +1,7 @@
 <template>
-  <div class="min-h-screen p-10 flex flex-col justify-center items-center mx-auto max-w-4xl">
+  <div class="min-h-screen p-10 flex flex-col justify-center items-center mx-auto max-w-4xl gap-5">
     <MotionSection>
       <h2 id="rent-canton" class="text-4xl font-semibold mb-8">Rent prices per canton</h2>
-    </MotionSection>
-    <MotionSection section-class="w-full">
-      <div class="mb-6 grid grid-cols-3 gap-4">
-        <div>
-          <label class="font-medium">Number of rooms</label>
-          <select v-model="selectedRoomOption" class="border border-gray-300 rounded p-2 w-full">
-            <option v-for="item in uniqueRoomOptions" :key="item" :value="item">
-              {{ item }}
-            </option>
-          </select>
-        </div>
-
-      </div>
     </MotionSection>
     <MotionSection>
       <p>
@@ -50,6 +37,18 @@
         are more affordable. The price gap between urban and rural cantons is particularly pronounced for large
         apartments.
       </p>
+    </MotionSection>
+    <MotionSection section-class="w-full">
+      <div class="mb-6 grid grid-cols-3 gap-4">
+        <div>
+          <label class="font-medium">Number of rooms</label>
+          <select v-model="selectedRoomOption" class="border border-gray-300 rounded p-2 w-full">
+            <option v-for="item in uniqueRoomOptions" :key="item" :value="item">
+              {{ item }}
+            </option>
+          </select>
+        </div>
+      </div>
     </MotionSection>
     <div class="w-full h-200 max-w-4xl p-4 mb-6">
       <client-only>

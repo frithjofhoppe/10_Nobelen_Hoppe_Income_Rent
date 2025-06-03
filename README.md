@@ -6,9 +6,11 @@
 ## :fire: Our idea
 Almost everyone who looked once for an apartment came along the question ... how much can I actually spent on my rent? aaaaand then after the disillusionment ... why is everything so f* expensive :-)? For that reason we took rent and income data from the swiss federal statistical office and compared the data based on the geographic and the education level of earners in switzerland. Our goal is to find out where housing takes bigger part of the income of people / larger disparity.
 
+> :rotating_light: The data sets are not available in english, thats the reason why the displayed content on the website is as well in german
+
 | Source :memo:                                                                                                                                                                           | Content                                                  | Usage                                                                     |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------- |
-| [OpenData Bundesamt für Statistik](https://opendata.swiss/de/dataset/durchschnittlicher-mietpreis-in-franken-nach-zimmerzahl-und-kanton3/resource/74f943bf-eb6c-4d60-b096-eb3b9e7ba7de) | Average rent prices per canton and nof rooms             | We used the data in the 2023 file for the map vizualisation and bar chart |
+| [OpenData Bundesamt für Statistik](https://opendata.swiss/de/dataset/durchschnittlicher-mietpreis-in-franken-nach-zimmerzahl-und-kanton3) | Average rent prices per canton and nof rooms             | We used the data in the 2023 file for the map vizualisation and bar chart |
 | [Bundesamt für Statistik](https://www.bfs.admin.ch/bfs/de/home/statistiken/arbeit-erwerb/loehne-erwerbseinkommen-arbeitskosten/lohnstruktur/grossregionen.assetdetail.32030272.html)    | Monthly income per greater area and education background | We used the 2022 data for the map visualization and bar chart             |
 
 

@@ -134,7 +134,7 @@ async function renderMap(data: SwitzerlandMapEntry[]) {
         tooltip
           .html(`
           <strong>${cantonEntry.cantonName}</strong> <br>
-          ${centerValue}
+          ${centerValue} CHF
         `)
 
         const tooltipWidth = tooltip.node().offsetWidth
