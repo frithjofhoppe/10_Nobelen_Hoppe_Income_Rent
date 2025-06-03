@@ -4,36 +4,42 @@
       <h2 id="income" class="text-4xl font-semibold mb-8 mx-auto max-w-4xl">Income by education and position</h2>
     </MotionSection>
     <MotionSection section-class="mx-auto max-w-4xl">
-      <p>
-        Income in Switzerland varies greatly depending on educational attainment and geographical region.
-        People with a university degree (e.g., UNI, ETH) earn the highest median wages, especially in
-        management positions. For example, men in upper management in Zurich earn an average of CHF 14,990, in Central
-        Switzerland
-        even CHF 15,391, while women with the same education and position earn slightly less, but still high amounts
-        (e.g., CHF 13,400 in Central Switzerland).
-      </p>
-      <p>
-        Income decreases as the level of education declines. Individuals with completed vocational training but without
-        management positions earn between around CHF 5,100 (Ticino, women) and CHF 6,900 (Zurich, men), depending on the
-        region.
-        In-house training also performs worst, especially in Ticino, with wages of around CHF
-        3,800 to CHF 5,000, which is significantly below the Swiss average.
-      </p>
-      <p>
-        Geographically, Zurich consistently stands out with the highest incomes, followed by Central Switzerland and
-        Northwestern Switzerland. In Western Switzerland (Région lémanique) and the Espace Mittelland, incomes are in
-        the midfield, while Ticino clearly brings up the rear – even for highly qualified individuals. This applies to
-        both genders and all positions.
-      </p>
-      <p>
-        A striking observation: Men systematically earn more than women in all regions and educational levels, even with
-        the same qualifications and functions. This gender pay gap is particularly evident in management positions.
-      </p>
-      <p>
-        In summary, it can be said: Education clearly pays off in Switzerland, both in terms of management opportunities
-        and income. At the same time, a clear urban-rural and north-south divide, as well as a persistent
-        gender-specific wage imbalance, are evident.
-      </p>
+      <div class="space-y-4">
+        <p>
+          Income in Switzerland varies greatly depending on educational attainment and geographical region.
+          People with a university degree (e.g., UNI, ETH) earn the highest median wages, especially in
+          management positions. For example, men in upper management in Zurich earn an average of CHF 14,990, in Central
+          Switzerland
+          even CHF 15,391, while women with the same education and position earn slightly less, but still high amounts
+          (e.g., CHF 13,400 in Central Switzerland).
+        </p>
+        <p>
+          Income decreases as the level of education declines. Individuals with completed vocational training but
+          without
+          management positions earn between around CHF 5,100 (Ticino, women) and CHF 6,900 (Zurich, men), depending on
+          the
+          region.
+          In-house training also performs worst, especially in Ticino, with wages of around CHF
+          3,800 to CHF 5,000, which is significantly below the Swiss average.
+        </p>
+        <p>
+          Geographically, Zurich consistently stands out with the highest incomes, followed by Central Switzerland and
+          Northwestern Switzerland. In Western Switzerland (Région lémanique) and the Espace Mittelland, incomes are in
+          the midfield, while Ticino clearly brings up the rear – even for highly qualified individuals. This applies to
+          both genders and all positions.
+        </p>
+        <p>
+          A striking observation: Men systematically earn more than women in all regions and educational levels, even
+          with
+          the same qualifications and functions. This gender pay gap is particularly evident in management positions.
+        </p>
+        <p>
+          In summary, it can be said: Education clearly pays off in Switzerland, both in terms of management
+          opportunities
+          and income. At the same time, a clear urban-rural and north-south divide, as well as a persistent
+          gender-specific wage imbalance, are evident.
+        </p>
+      </div>
     </MotionSection>
     <MotionSection section-class="w-full mx-auto max-w-4xl">
       <div class="mb-6 grid grid-cols-3 gap-4">

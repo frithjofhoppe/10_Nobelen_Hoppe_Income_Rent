@@ -4,78 +4,82 @@
       <h2 id="income-rent" class="text-4xl font-semibold mb-8">Comparison of rent prices and incomes</h2>
     </MotionSection>
     <MotionSection>
-      <p>
-        Housing is not equally affordable for everyone. Income disparities and regional price differences lead to
-        unequal burdens.
-      </p>
+      <div class="space-y-4">
+        <p>
+          Housing is not equally affordable for everyone. Income disparities and regional price differences lead to
+          unequal burdens.
+        </p>
 
-      <p>
-        A combined analysis of Swiss income and rental price data shows significant differences in the
-        financial burden of rent depending on region and level of education. According to the rule of thumb, a maximum
-        of 30%
-        of net income should be spent on rent. Since the wages available are gross wages, this
-        guideline is difficult to achieve for people on low incomes – especially in regions with high rents.
-      </p>
+        <p>
+          A combined analysis of Swiss income and rental price data shows significant differences in the
+          financial burden of rent depending on region and level of education. According to the rule of thumb, a maximum
+          of 30%
+          of net income should be spent on rent. Since the wages available are gross wages, this
+          guideline is difficult to achieve for people on low incomes – especially in regions with high rents.
+        </p>
 
-      <p>
-        In Zurich, for example, the average gross income of a person without a management position who has completed
-        vocational training is CHF 6,289 (men), while the average rent for a three-room apartment is CHF 1,681
-        . If we simplify and calculate with around 80% net (i.e. ~CHF 5,000), the rent would correspond to around 34% of
-        net income – and is therefore above the benchmark. For lower wages, such as in Ticino (CHF 5,482 gross),
-        this ratio is even more problematic: with rental costs of CHF 1,241 for a three-room apartment, the
-        burden is over 38%.
-      </p>
+        <p>
+          In Zurich, for example, the average gross income of a person without a management position who has completed
+          vocational training is CHF 6,289 (men), while the average rent for a three-room apartment is CHF 1,681
+          . If we simplify and calculate with around 80% net (i.e. ~CHF 5,000), the rent would correspond to around 34%
+          of
+          net income – and is therefore above the benchmark. For lower wages, such as in Ticino (CHF 5,482 gross),
+          this ratio is even more problematic: with rental costs of CHF 1,241 for a three-room apartment, the
+          burden is over 38%.
+        </p>
 
-      <p>
-        It is striking that people with vocational training or internal training who do not hold management positions in
-        particular struggle to comply with the
-        30% rule – especially in urban regions such as Zurich, Geneva, or Zug, where rents are high even for small
-        apartments. In more rural areas such as Jura or Uri, on the other hand, the situation is more relaxed, as both
-        rents are lower and incomes are lower but more affordable in relative terms.
-      </p>
-
-    <MotionSection id="map" section-class="w-full max-w-4xl h-auto p-4">
-      <div class="mb-7 flex flex-wrap gap-4 items-end">
-        <div class="flex-1 min-w-[180px]">
-          <label class="font-medium">Number of rooms</label>
-          <select v-model="selectedRoomOption" class="border border-gray-300 rounded p-2 w-full">
-            <option v-for="item in uniqueRoomOptions" :key="item" :value="item">
-              {{ item }}
-            </option>
-          </select>
-        </div>
-
-        <!-- Professional position -->
-        <div class="flex-1 min-w-[180px]">
-          <label class="font-medium">Professional position</label>
-          <select v-model="selectedPosition" class="border border-gray-300 rounded p-2 w-full">
-            <option v-for="item in uniquePositions" :key="item" :value="item">
-              {{ item }}
-            </option>
-          </select>
-        </div>
-
-        <!-- Gender -->
-        <div class="flex-1 min-w-[180px]">
-          <label class="font-medium">Gender</label>
-          <select v-model="selectedGender" class="border border-gray-300 rounded p-2 w-full">
-            <option v-for="item in uniqueGenders" :key="item" :value="item">
-              {{ item }}
-            </option>
-          </select>
-        </div>
-
-        <!-- Canton -->
-        <div class="flex-1 min-w-[180px]">
-          <label class="font-medium">Canton</label>
-          <select v-model="selectCanton" class="border border-gray-300 rounded p-2 w-full">
-            <option v-for="item in cantons" :key="item.cantonCode" :value="item.cantonCode">
-              {{ item.cantonCode }}
-            </option>
-          </select>
-        </div>
+        <p>
+          It is striking that people with vocational training or internal training who do not hold management positions
+          in
+          particular struggle to comply with the
+          30% rule – especially in urban regions such as Zurich, Geneva, or Zug, where rents are high even for small
+          apartments. In more rural areas such as Jura or Uri, on the other hand, the situation is more relaxed, as both
+          rents are lower and incomes are lower but more affordable in relative terms.
+        </p>
       </div>
-    </MotionSection>
+
+      <MotionSection id="map" section-class="w-full max-w-4xl h-auto p-4">
+        <div class="mb-7 flex flex-wrap gap-4 items-end">
+          <div class="flex-1 min-w-[180px]">
+            <label class="font-medium">Number of rooms</label>
+            <select v-model="selectedRoomOption" class="border border-gray-300 rounded p-2 w-full">
+              <option v-for="item in uniqueRoomOptions" :key="item" :value="item">
+                {{ item }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Professional position -->
+          <div class="flex-1 min-w-[180px]">
+            <label class="font-medium">Professional position</label>
+            <select v-model="selectedPosition" class="border border-gray-300 rounded p-2 w-full">
+              <option v-for="item in uniquePositions" :key="item" :value="item">
+                {{ item }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Gender -->
+          <div class="flex-1 min-w-[180px]">
+            <label class="font-medium">Gender</label>
+            <select v-model="selectedGender" class="border border-gray-300 rounded p-2 w-full">
+              <option v-for="item in uniqueGenders" :key="item" :value="item">
+                {{ item }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Canton -->
+          <div class="flex-1 min-w-[180px]">
+            <label class="font-medium">Canton</label>
+            <select v-model="selectCanton" class="border border-gray-300 rounded p-2 w-full">
+              <option v-for="item in cantons" :key="item.cantonCode" :value="item.cantonCode">
+                {{ item.cantonCode }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </MotionSection>
 
       <svg ref="chart" width="800" height="500" />
     </MotionSection>

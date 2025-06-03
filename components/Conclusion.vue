@@ -1,7 +1,7 @@
 <template>
   <MotionSection section-class="min-h-screen flex flex-col justify-center items-center text-center p-10 bg-gray-100">
     <h2 id="conclusion" class="text-3xl font-bold mb-4 mx-auto max-w-4xl">Conclusion</h2>
-    <div class="mx-auto max-w-4xl text-left">
+    <div class="mx-auto max-w-4xl text-left space-y-4">
       <p>
         Data-based analysis shows that living in Switzerland is strongly influenced by regional and social differences
         . Rents and incomes are unevenly distributed – both geographically and in terms of education,
