@@ -6,38 +6,18 @@
     <MotionSection section-class="mx-auto max-w-4xl">
       <div class="space-y-4">
         <p>
-          Income in Switzerland varies greatly depending on educational attainment and geographical region.
-          People with a university degree (e.g., UNI, ETH) earn the highest median wages, especially in
-          management positions. For example, men in upper management in Zurich earn an average of CHF 14,990, in Central
-          Switzerland
-          even CHF 15,391, while women with the same education and position earn slightly less, but still high amounts
-          (e.g., CHF 13,400 in Central Switzerland).
+          The second section is about income. Our graphic lets you filter by region, gender, and education level—and
+          discover how your position affects your salary.
         </p>
         <p>
-          Income decreases as the level of education declines. Individuals with completed vocational training but
-          without
-          management positions earn between around CHF 5,100 (Ticino, women) and CHF 6,900 (Zurich, men), depending on
-          the
-          region.
-          In-house training also performs worst, especially in Ticino, with wages of around CHF
-          3,800 to CHF 5,000, which is significantly below the Swiss average.
+          Top earners with a university degree and a management position earn up to CHF 15,000 gross per month in Zurich
+          and Central Switzerland. But those who “only” have vocational training quickly end up earning between CHF
+          5,500 and CHF 6,500 – and in Ticino often significantly less. And women? They consistently earn less. Example:
+          In northwestern Switzerland, a woman with vocational training and no management position takes home an average
+          of CHF 5,200 – around CHF 1,000 less than her male counterpart.
         </p>
         <p>
-          Geographically, Zurich consistently stands out with the highest incomes, followed by Central Switzerland and
-          Northwestern Switzerland. In Western Switzerland (Région lémanique) and the Espace Mittelland, incomes are in
-          the midfield, while Ticino clearly brings up the rear – even for highly qualified individuals. This applies to
-          both genders and all positions.
-        </p>
-        <p>
-          A striking observation: Men systematically earn more than women in all regions and educational levels, even
-          with
-          the same qualifications and functions. This gender pay gap is particularly evident in management positions.
-        </p>
-        <p>
-          In summary, it can be said: Education clearly pays off in Switzerland, both in terms of management
-          opportunities
-          and income. At the same time, a clear urban-rural and north-south divide, as well as a persistent
-          gender-specific wage imbalance, are evident.
+          👉 Play around with the selection – you will quickly see which factors really matter.
         </p>
       </div>
     </MotionSection>

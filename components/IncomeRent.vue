@@ -6,35 +6,27 @@
     <MotionSection>
       <div class="space-y-4">
         <p>
-          Housing is not equally affordable for everyone. Income disparities and regional price differences lead to
-          unequal burdens.
-        </p>
+          Now let's get specific: The third chart links income and rent – and asks the question: How much of your income
+          really goes toward housing? The rule of thumb is that a maximum of 30% of your net income should be spent on
+          rent. But in reality, this limit is often exceeded – sometimes significantly.
 
-        <p>
-          A combined analysis of Swiss income and rental price data shows significant differences in the
-          financial burden of rent depending on region and level of education. According to the rule of thumb, a maximum
-          of 30%
-          of net income should be spent on rent. Since the wages available are gross wages, this
-          guideline is difficult to achieve for people on low incomes – especially in regions with high rents.
         </p>
-
         <p>
-          In Zurich, for example, the average gross income of a person without a management position who has completed
-          vocational training is CHF 6,289 (men), while the average rent for a three-room apartment is CHF 1,681
-          . If we simplify and calculate with around 80% net (i.e. ~CHF 5,000), the rent would correspond to around 34%
-          of
-          net income – and is therefore above the benchmark. For lower wages, such as in Ticino (CHF 5,482 gross),
-          this ratio is even more problematic: with rental costs of CHF 1,241 for a three-room apartment, the
-          burden is over 38%.
+          An example from Zurich: The average gross salary for a person with vocational training who is not a manager is
+          CHF 6,289. At 80%, the net salary is around CHF 5,031. The average rent for a three-room apartment is CHF
+          1,681 – that is around 33.4% of net income.
         </p>
-
         <p>
-          It is striking that people with vocational training or internal training who do not hold management positions
-          in
-          particular struggle to comply with the
-          30% rule – especially in urban regions such as Zurich, Geneva, or Zug, where rents are high even for small
-          apartments. In more rural areas such as Jura or Uri, on the other hand, the situation is more relaxed, as both
-          rents are lower and incomes are lower but more affordable in relative terms.
+          The situation is even more pronounced in Ticino: with a gross salary of CHF 5,482 (vocational training, no
+          management position), the net salary is CHF 4,386. The rent for a three-room apartment is CHF 1,241 – that's
+          28.3%. Sounds better? Yes – but only just below the breaking point, with no leeway for rising ancillary costs.
+        </p>
+        <p>
+          The situation is critical for single parents or part-time workers in expensive regions: anyone earning less
+          than CHF 4,500 net and paying more than CHF 1,300 in rent quickly reaches the 35% mark.
+        </p>
+        <p>
+          👉 The graph shows that, depending on the region and job profile, the 30% rule is often nothing more than an ideal. Click through—what does it look like for you?
         </p>
       </div>
 

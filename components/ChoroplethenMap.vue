@@ -6,37 +6,18 @@
     <MotionSection>
       <div class="space-y-4">
         <p>
-          Rental prices in Switzerland vary significantly depending on the number of rooms. For one-room apartments, the
-          average price across cantons ranges from around CHF 540 (Jura) to CHF 1,050 (Zurich). As the
-          number of rooms increases, prices rise as expected. Two-room apartments cost an average of around
-          CHF 760 (JU) and CHF 1,460 (ZH/ZG), while six-room apartments and larger ones can cost up to CHF 3,391 (ZG).
+          Welcome to your journey through the Swiss rental market. Our first chart shows you at a glance: apartment
+          prices are everything – except fairly distributed.
         </p>
         <p>
-          The sharp rise in prices in the cantons of Zurich (ZH), Zug (ZG), Vaud (VD), and Geneva (GE) is striking,
-          especially
-          for larger apartments. In these cantons, the average prices for 6-room apartments sometimes
-          significantly exceed the CHF 2,800 mark. Zug is the frontrunner with CHF 3,391, followed by Zurich with CHF
-          3,000. In
-          contrast, prices in more rural cantons such as Jura, Uri, and Valais remain well below these figures.
-        </p>
-
-        <p>
-          Another interesting pattern is the comparatively low price increase in some cantons for
-          larger apartments. For example, the difference between 4- and 5-room apartments in Appenzell
-          Ausserrhoden (AR) or Glarus (GL) is moderate, which could indicate lower supply or weaker demand for
-          large apartments.
-        </p>
-
-        <p>
-          Some cantons, such as Appenzell Innerrhoden (AI) and Nidwalden (NW), show gaps in the data for one-room
-          apartments, which
-          indicates a low number of such properties on offer. These data gaps can slightly impair comparability.
+          Try out different cantons and room sizes. You will quickly notice that prices do not rise linearly, but in
+          leaps and bounds. A three-room apartment in Zurich costs an average of CHF 1,681, while in Neuchâtel it costs
+          only CHF 1,010. Particularly striking: six-room apartments in the canton of Zug cost an average of CHF 3,391.
+          That is almost three times as much as in the canton of Jura (CHF 1,391).
         </p>
         <p>
-          Overall, it can be said that rental prices rise with the size of the apartment, but not linearly. Regional
-          differences are considerable – urban and economically strong cantons are more expensive, while rural regions
-          are more affordable. The price gap between urban and rural cantons is particularly pronounced for large
-          apartments.
+          👉 Tip: Pay attention to the jump between 3 and 4 rooms – rents are skyrocketing in many cantons in this
+          range.
         </p>
       </div>
     </MotionSection>
