@@ -4,11 +4,15 @@
 :rocket: The website is automatically deployed as github page [https://frithjofhoppe.github.io/10_Nobelen_Hoppe_Income_Rent/](https://frithjofhoppe.github.io/10_Nobelen_Hoppe_Income_Rent/)
 
 ## :fire: Our idea
-Almost everyone who looked once for an apartment came along the question ... how much can I actually spent on my rent? aaaaand then after the disillusionment ... why is everything so f* expensive :-)?
+Almost everyone who looked once for an apartment came along the question ... how much can I actually spent on my rent? aaaaand then after the disillusionment ... why is everything so f* expensive :-)? For that reason we took rent and income data from the swiss federal statistical office and compared the data based on the geographic and the education level of earners in switzerland. Our goal is to find out where housing takes bigger part of the income of people / larger disparity.
 
-We took rent and income data from the swiss federal statistical office and compared the data based on the geographic and the education level of earners
+| Source :memo:                                                                                                                                                                           | Content                                                  | Usage                                                                     |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------- |
+| [OpenData Bundesamt für Statistik](https://opendata.swiss/de/dataset/durchschnittlicher-mietpreis-in-franken-nach-zimmerzahl-und-kanton3/resource/74f943bf-eb6c-4d60-b096-eb3b9e7ba7de) | Average rent prices per canton and nof rooms             | We used the data in the 2023 file for the map vizualisation and bar chart |
+| [Bundesamt für Statistik](https://www.bfs.admin.ch/bfs/de/home/statistiken/arbeit-erwerb/loehne-erwerbseinkommen-arbeitskosten/lohnstruktur/grossregionen.assetdetail.32030272.html)    | Monthly income per greater area and education background | We used the 2022 data for the map visualization and bar chart             |
 
-## Setup
+
+## Development Server
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
@@ -28,8 +32,6 @@ yarn install
 bun install
 ```
 
-## Development Server
-
 Start the development server on `http://localhost:3000`:
 
 ```bash
@@ -44,24 +46,6 @@ yarn dev
 
 # bun
 bun run dev
-```
-
-## Production
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
