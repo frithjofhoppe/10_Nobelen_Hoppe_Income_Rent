@@ -7,11 +7,11 @@
         </client-only>
       </div>
       <h1 class="text-5xl font-bold mb-8">
-        Wie leistbar ist Wohnen in der Schweiz?
+        How affordable is housing in Switzerland?
       </h1>
       <p class="text-xl max-w-2xl mb-10">
-        Datenbasiertes Storytelling rund um Mieten und Einkommen in der Schweiz –
-        visualisiert und verständlich gemacht.
+        Data-driven storytelling about rents and incomes in Switzerland –
+        visualized and made understandable.
       </p>
       <button
         class="bg-white rounded-full p-3 shadow-md hover:shadow-lg cursor-pointer transition duration-300 flex items-center justify-center group"

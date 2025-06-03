@@ -1,13 +1,13 @@
 <template>
   <div class="min-h-screen p-10 flex flex-col justify-center items-center bg-gray-50">
     <MotionSection>
-    <h2 id="income" class="text-4xl font-semibold mb-8 mx-auto max-w-4xl">Einkommen nach Berufsfeld</h2>
+      <h2 id="income" class="text-4xl font-semibold mb-8 mx-auto max-w-4xl">Income by education and position</h2>
     </MotionSection>
     <MotionSection section-class="w-full mx-auto max-w-4xl">
       <div class="mb-6 grid grid-cols-3 gap-4">
         <!-- Ausbildung -->
         <div>
-          <label class="font-medium" for="education-select">Ausbildung</label>
+          <label class="font-medium" for="education-select">Education</label>
           <select id="education-select" v-model="selectedEducation" class="w-full mt-2 p-2 border rounded">
             <option v-for="item in uniqueEducations" :key="item" :value="item">
               {{ item }}
@@ -16,7 +16,7 @@
         </div>
         <!-- Berufliche Stellung -->
         <div class="mx-auto max-w-4xl">
-          <label class="font-medium" for="position-select">Berufliche Stellung</label>
+          <label class="font-medium" for="position-select">Professional position</label>
           <select id="position-select" v-model="selectedPosition" class="w-full mt-2 p-2 border rounded">
             <option v-for="item in uniquePositions" :key="item" :value="item">
               {{ item }}
@@ -25,7 +25,7 @@
         </div>
         <!-- Geschlecht -->
         <div>
-          <label class="font-medium" for="gender-select">Geschlecht</label>
+          <label class="font-medium" for="gender-select">Gender</label>
           <select id="gender-select" v-model="selectedGender" class="w-full mt-2 p-2 border rounded">
             <option v-for="item in uniqueGenders" :key="item" :value="item">
               {{ item }}
@@ -36,37 +36,27 @@
     </MotionSection>
     <MotionSection section-class="mx-auto max-w-4xl">
       <p>
-        Die Einkommen in der Schweiz variieren stark in Abhängigkeit von Ausbildungsstand und geografischer Region.
-        Personen mit universitärem Abschluss (z. B. UNI, ETH) erzielen die höchsten Medianlöhne, insbesondere in
-        Kaderpositionen. So verdienen Männer im oberen Kader in Zürich durchschnittlich CHF 14'990, in der Zentralschweiz
-        sogar CHF 15'391, während Frauen mit gleicher Ausbildung und Position etwas weniger, aber ebenfalls hohe Werte
-        erreichen (z. B. CHF 13'400 in der Zentralschweiz).
+        Income in Switzerland varies greatly depending on educational attainment and geographical region.
+        People with a university degree (e.g., UNI, ETH) earn the highest median wages, especially in
+        management positions. For example, men in upper management in Zurich earn an average of CHF 14,990, in Central
+        Switzerland
+        even CHF 15,391, while women with the same education and position earn slightly less, but still high amounts
+        (e.g., CHF 13,400 in Central Switzerland).
       </p>
-
       <p>
-        Mit sinkendem Ausbildungsniveau nehmen die Einkommen ab. Personen mit abgeschlossener Berufsausbildung ohne
-        Kaderfunktion verdienen je nach Region zwischen rund CHF 5'100 (Tessin, Frauen) und CHF 6'900 (Zürich, Männer).
-        Auch die unternehmensinterne Ausbildung schneidet am schlechtesten ab – insbesondere im Tessin mit Löhnen um CHF
-        3'800 bis CHF 5'000, was deutlich unter dem Schweizer Durchschnitt liegt.
+      Income decreases as the level of education declines. Individuals with completed vocational training but without
+        management positions earn between around CHF 5,100 (Ticino, women) and CHF 6,900 (Zurich, men), depending on the region.
+        In-house training also performs worst, especially in Ticino, with wages of around CHF
+        3,800 to CHF 5,000, which is significantly below the Swiss average.
       </p>
-
       <p>
-        Geografisch sticht Zürich durchgehend mit den höchsten Einkommen hervor, gefolgt von der Zentralschweiz und der
-        Nordwestschweiz. In der Westschweiz (Région lémanique) und im Espace Mittelland liegen die Einkommen im
-        Mittelfeld, während das Tessin klar das Schlusslicht bildet – selbst für hochqualifizierte Personen. Dies gilt für
-        beide Geschlechter und alle Positionen.
+        Geographically, Zurich consistently stands out with the highest incomes, followed by Central Switzerland and Northwestern Switzerland. In Western Switzerland (Région lémanique) and the Espace Mittelland, incomes are in the midfield, while Ticino clearly brings up the rear – even for highly qualified individuals. This applies to both genders and all positions.
       </p>
-
       <p>
-        Eine auffällige Beobachtung: Männer verdienen in allen Regionen und Ausbildungsstufen systematisch mehr als
-        Frauen, selbst bei gleicher Qualifikation und Funktion. Dieser Gender Pay Gap ist besonders in Kaderpositionen
-        sichtbar.
+        A striking observation: Men systematically earn more than women in all regions and educational levels, even with the same qualifications and functions. This gender pay gap is particularly evident in management positions.
       </p>
-
       <p>
-        Zusammenfassend lässt sich sagen: Bildung lohnt sich in der Schweiz eindeutig, sowohl in Bezug auf Kaderchancen
-        als auch auf Einkommen. Gleichzeitig zeigt sich ein deutliches Stadt-Land- und Nord-Süd-Gefälle sowie ein
-        anhaltendes geschlechtsspezifisches Lohnungleichgewicht.
+        In summary, it can be said: Education clearly pays off in Switzerland, both in terms of management opportunities and income. At the same time, a clear urban-rural and north-south divide, as well as a persistent gender-specific wage imbalance, are evident.
       </p>
     </MotionSection>
     <div class="w-full h-200 max-w-4xl p-4 mb-6">
@@ -76,8 +66,7 @@
             Lädt Karte...
           </div>
         </template>
-        <SwitzerlandCantonsMap
-          v-if="filteredData && areFiltersApplied" class="size-full"
+        <SwitzerlandCantonsMap v-if="filteredData && areFiltersApplied" class="size-full"
           :data="mapping.map(mapRegionToCanton(filteredData))" />
       </client-only>
     </div>

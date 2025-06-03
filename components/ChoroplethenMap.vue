@@ -1,54 +1,56 @@
 <template>
   <div class="min-h-screen p-10 flex flex-col justify-center items-center mx-auto max-w-4xl">
     <MotionSection>
-    <h2 id="rent-canton" class="text-4xl font-semibold mb-8">Mietpreise nach Kanton</h2>
+      <h2 id="rent-canton" class="text-4xl font-semibold mb-8">Rent prices per canton</h2>
     </MotionSection>
     <MotionSection section-class="w-full">
       <div class="mb-6 grid grid-cols-3 gap-4">
         <div>
-          <label class="font-medium">Anzahl an Zimmern</label>
+          <label class="font-medium">Number of rooms</label>
           <select v-model="selectedRoomOption" class="border border-gray-300 rounded p-2 w-full">
             <option v-for="item in uniqueRoomOptions" :key="item" :value="item">
               {{ item }}
             </option>
           </select>
         </div>
-        
+
       </div>
     </MotionSection>
-<MotionSection>
-    <p>
-      Die Mietpreise in der Schweiz variieren je nach Zimmeranzahl deutlich. Für Einzimmerwohnungen liegt der
-      Durchschnittspreis kantonsübergreifend zwischen ca. CHF 540 (Jura) und CHF 1'050 (Zürich). Mit zunehmender
-      Zimmeranzahl steigen die Preise erwartungsgemäss an. So kosten 2-Zimmer-Wohnungen durchschnittlich zwischen rund
-      CHF 760 (JU) und CHF 1'460 (ZH/ZG), während 6-Zimmer-Wohnungen und grösser Preise bis zu CHF 3'391 (ZG) erreichen.
-    </p>
-    <p>
-      Auffällig ist der steile Preisanstieg in den Kantonen Zürich (ZH), Zug (ZG), Waadt (VD) und Genf (GE), besonders
-      bei grösseren Wohnungen. In diesen Kantonen überschreiten die Durchschnittspreise für 6-Zimmer-Wohnungen teils
-      deutlich die CHF 2'800-Marke. Zug ist dabei Spitzenreiter mit CHF 3'391, gefolgt von Zürich mit CHF 3'000. Im
-      Gegensatz dazu bleiben die Preise in ländlicheren Kantonen wie Jura, Uri oder Wallis deutlich unter diesen Werten.
-    </p>
+    <MotionSection>
+      <p>
+        Rental prices in Switzerland vary significantly depending on the number of rooms. For one-room apartments, the
+        average price across cantons ranges from around CHF 540 (Jura) to CHF 1,050 (Zurich). As the
+        number of rooms increases, prices rise as expected. Two-room apartments cost an average of around
+        CHF 760 (JU) and CHF 1,460 (ZH/ZG), while six-room apartments and larger ones can cost up to CHF 3,391 (ZG).
+      </p>
+      <p>
+        The sharp rise in prices in the cantons of Zurich (ZH), Zug (ZG), Vaud (VD), and Geneva (GE) is striking,
+        especially
+        for larger apartments. In these cantons, the average prices for 6-room apartments sometimes
+        significantly exceed the CHF 2,800 mark. Zug is the frontrunner with CHF 3,391, followed by Zurich with CHF
+        3,000. In
+        contrast, prices in more rural cantons such as Jura, Uri, and Valais remain well below these figures.
+      </p>
 
-    <p>
-      Ein weiteres interessantes Muster ist die vergleichsweise geringe Preissteigerung in einigen Kantonen bei
-      grösseren Wohnungen. Beispielsweise ist der Unterschied zwischen 4- und 5-Zimmer-Wohnungen in Appenzell
-      Ausserrhoden (AR) oder Glarus (GL) moderat, was auf ein geringeres Angebot oder eine schwächere Nachfrage nach
-      grossen Wohnungen hinweisen könnte.
-    </p>
+      <p>
+        Another interesting pattern is the comparatively low price increase in some cantons for
+        larger apartments. For example, the difference between 4- and 5-room apartments in Appenzell
+        Ausserrhoden (AR) or Glarus (GL) is moderate, which could indicate lower supply or weaker demand for
+        large apartments.
+      </p>
 
-    <p>
-      Einige Kantone wie Appenzell Innerrhoden (AI) oder Nidwalden (NW) zeigen Lücken bei den Einzimmerwohnungen, was
-      auf eine geringe Anzahl entsprechender Angebote hindeutet. Diese Datenlücken können die Vergleichbarkeit leicht
-      beeinträchtigen.
-    </p>
-    <p>
-      Insgesamt lässt sich sagen: Die Mietpreise steigen mit der Wohnungsgrösse an, jedoch nicht linear. Regionale
-      Unterschiede sind erheblich – städtische und wirtschaftlich starke Kantone sind teurer, ländliche Regionen
-      hingegen erschwinglicher. Besonders bei grossen Wohnungen ist das Preisgefälle zwischen Stadt- und Landkantonen
-      deutlich ausgeprägt.
-    </p>
-</MotionSection>
+      <p>
+        Some cantons, such as Appenzell Innerrhoden (AI) and Nidwalden (NW), show gaps in the data for one-room
+        apartments, which
+        indicates a low number of such properties on offer. These data gaps can slightly impair comparability.
+      </p>
+      <p>
+        Overall, it can be said that rental prices rise with the size of the apartment, but not linearly. Regional
+        differences are considerable – urban and economically strong cantons are more expensive, while rural regions
+        are more affordable. The price gap between urban and rural cantons is particularly pronounced for large
+        apartments.
+      </p>
+    </MotionSection>
     <div class="w-full h-200 max-w-4xl p-4 mb-6">
       <client-only>
         <template #fallback>
@@ -56,13 +58,12 @@
             Lädt Karte...
           </div>
         </template>
-        <SwitzerlandCantonsMap
-v-if="filteredRentData && areFiltersApplied" class="w-full h-full"
+        <SwitzerlandCantonsMap v-if="filteredRentData && areFiltersApplied" class="w-full h-full"
           :data="filteredRentData" />
       </client-only>
     </div>
   </div>
-  </template>
+</template>
 
 
 <script setup lang="ts">

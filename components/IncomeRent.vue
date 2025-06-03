@@ -1,12 +1,12 @@
 <template>
   <div class="min-h-screen p-10 flex flex-col justify-center items-center mx-auto max-w-4xl">
     <MotionSection>
-    <h2 id="income-rent" class="text-4xl font-semibold mb-8">Vergleich von Mietpreisen zu Einkommen</h2>
-</MotionSection>
+      <h2 id="income-rent" class="text-4xl font-semibold mb-8">Comparison of rent prices and incomes</h2>
+    </MotionSection>
     <MotionSection id="map" section-class="w-full max-w-4xl h-auto p-4">
       <div class="mb-7 flex flex-wrap gap-4">
         <div>
-          <label class="font-medium">Anzahl an Zimmern</label>
+          <label class="font-medium">Number of rooms</label>
           <select v-model="selectedRoomOption" class="border border-gray-300 rounded p-2 w-full">
             <option v-for="item in uniqueRoomOptions" :key="item" :value="item">
               {{ item }}
@@ -14,9 +14,9 @@
           </select>
         </div>
 
-        <!-- Berufliche Stellung -->
+        <!-- Professional position -->
         <div>
-          <label class="font-medium">Berufliche Stellung</label>
+          <label class="font-medium">Professional position</label>
           <select v-model="selectedPosition" class="border border-gray-300 rounded p-2 w-full">
             <option v-for="item in uniquePositions" :key="item" :value="item">
               {{ item }}
@@ -24,9 +24,9 @@
           </select>
         </div>
 
-        <!-- Geschlecht -->
+        <!-- Gender -->
         <div>
-          <label class="font-medium">Geschlecht</label>
+          <label class="font-medium">Gender</label>
           <select v-model="selectedGender" class="border border-gray-300 rounded p-2 w-full">
             <option v-for="item in uniqueGenders" :key="item" :value="item">
               {{ item }}
@@ -34,9 +34,9 @@
           </select>
         </div>
 
-        <!-- Kanton -->
+        <!-- Canton -->
         <div>
-          <label class="font-medium">Kanton</label>
+          <label class="font-medium">Canton</label>
           <select v-model="selectCanton" class="border border-gray-300 rounded p-2 w-full">
             <option v-for="item in cantons" :key="item.cantonCode" :value="item.cantonCode">
               {{ item.cantonCode }}
@@ -46,37 +46,39 @@
 
       </div>
     </MotionSection>
-<MotionSection>
-    <p>
-      Wohnen ist nicht für alle gleich leistbar. Einkommensunterschiede und regionale Preisunterschiede führen zu
-      ungleichen Belastungen.
-    </p>
+    <MotionSection>
+      <p>
+        Housing is not equally affordable for everyone. Income disparities and regional price differences lead to
+        unequal burdens.
+      </p>
 
-    <p>
-      Eine kombinierte Analyse der Schweizer Einkommens- und Mietpreisdaten zeigt deutliche Unterschiede in der
-      finanziellen Belastung durch Mieten je nach Region und Bildungsstand. Gemäss der Faustregel sollten maximal 30 %
-      des Nettoeinkommens für die Miete aufgewendet werden. Da die vorliegenden Löhne Bruttolöhne sind, ist dieser
-      Richtwert nur schwer erreichbar für Personen mit tiefem Einkommen – vor allem in Regionen mit hohen Mieten.
-    </p>
+      <p>
+        A combined analysis of Swiss income and rental price data shows significant differences in the
+        financial burden of rent depending on region and level of education. According to the rule of thumb, a maximum
+        of 30%
+        of net income should be spent on rent. Since the wages available are gross wages, this
+        guideline is difficult to achieve for people on low incomes – especially in regions with high rents.
+      </p>
 
-    <p>
-      In Zürich beispielsweise liegt das mittlere Bruttoeinkommen einer Person ohne Kaderfunktion mit abgeschlossener
-      Berufsausbildung bei CHF 6’289 (Männer), während die durchschnittliche Miete für eine 3-Zimmer-Wohnung CHF 1’681
-      beträgt. Rechnet man vereinfacht mit etwa 80 % Netto (also ~CHF 5’000), entspräche die Miete rund 34 % des
-      Nettoeinkommens – und liegt somit über dem Richtwert. Für geringere Löhne, wie z. B. im Tessin (CHF 5’482 brutto),
-      ist dieses Verhältnis noch problematischer: Bei Mietkosten von CHF 1’241 für eine 3-Zimmer-Wohnung liegt die
-      Belastung bei über 38 %.
-    </p>
+      <p>
+        In Zurich, for example, the average gross income of a person without a management position who has completed
+        vocational training is CHF 6,289 (men), while the average rent for a three-room apartment is CHF 1,681
+        . If we simplify and calculate with around 80% net (i.e. ~CHF 5,000), the rent would correspond to around 34% of
+        net income – and is therefore above the benchmark. For lower wages, such as in Ticino (CHF 5,482 gross),
+        this ratio is even more problematic: with rental costs of CHF 1,241 for a three-room apartment, the
+        burden is over 38%.
+      </p>
 
-    <p>
-      Auffällig ist, dass vor allem Personen mit Berufslehre oder interner Ausbildung ohne Kaderfunktion Mühe haben, die
-      30 %-Regel einzuhalten – besonders in urbanen Regionen wie Zürich, Genf oder Zug, wo die Mieten für selbst kleine
-      Wohnungen hoch sind. In ländlicheren Gegenden wie Jura oder Uri hingegen ist die Situation entspannter, da sowohl
-      die Mieten tiefer als auch die Einkommen zwar niedriger, aber im Verhältnis dazu besser tragbar sind.
-    </p>
+      <p>
+        It is striking that people with vocational training or internal training who do not hold management positions in
+        particular struggle to comply with the
+        30% rule – especially in urban regions such as Zurich, Geneva, or Zug, where rents are high even for small
+        apartments. In more rural areas such as Jura or Uri, on the other hand, the situation is more relaxed, as both
+        rents are lower and incomes are lower but more affordable in relative terms.
+      </p>
 
 
-    <svg ref="chart" width="800" height="500"/>
+      <svg ref="chart" width="800" height="500" />
     </MotionSection>
   </div>
 </template>
@@ -137,7 +139,7 @@ const filteredData = computed(() => {
     }).filter(d => d && d?.nettoIncome)
       .map(d => ({
         ...d,
-        // 30% Faustregel für Miete
+        // 30% rule of thumb for rent
         threshold: d.nettoIncome * 0.3
       })).filter(d => d !== undefined)
   }
@@ -229,7 +231,7 @@ function renderBarChart(data: LineBarEntry[]) {
   const legendData = [
     { label: "Netto Income", color: "#4daf4a" },
     { label: "Rent", color: "#e41a1c" },
-    { label: "30% Faustregel", color: "#377eb8", type: "line" }
+    { label: "30% rule of thumb", color: "#377eb8", type: "line" }
   ];
 
   legend.selectAll("*")
